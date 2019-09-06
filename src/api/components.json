@@ -1,10 +1,311 @@
 [
 	{
-		"isim":"HAydarpaşa tren istasyonu",
-		"type":"appImage1"
+		"id" :1,
+		"name" : "Kat 1",
+		"masalar":[
+			{
+				"id" : 1,
+				"name":"FISHBONE MASASI",
+				"sandalyeler":[
+					{
+						"id":1,
+						"name" : "Sandalye 1",
+						"kisiler" : [
+							{
+								"id":1,
+								"name":"Mert"
+							}
+						]
+					},
+					{
+						"id":2,
+						"name" : "Sandalye 2",
+						"kisiler" : [
+							{
+								"id":2,
+								"name":"Onur"
+							}
+						]
+					},
+					{
+						"id":3,
+						"name" : "Sandalye 3",
+						"kisiler" : [
+							{
+								"id":3,
+								"name":"Yeşim"
+							}
+						]
+					},
+					{
+						"id":4,
+						"name" : "Sandalye 4",
+						"kisiler" : [
+							{
+								"id":4,
+								"name":"İrem"
+							}
+						]
+					}
+					
+				]
+			},
+			{
+				"id" : 2,
+				"name":"BACKOFFICE MASASI",
+				"sandalyeler":[
+					{
+						"id":1,
+						"name" : "Sandalye 1",
+						"kisiler" : [
+							{
+								"id":1,
+								"name":"Hasan"
+							}
+						]
+					},
+					{
+						"id":2,
+						"name" : "Sandalye 2",
+						"kisiler" : [
+							{
+								"id":2,
+								"name":"Baş"
+							}
+						]
+					},
+					{
+						"id":3,
+						"name" : "Sandalye 3",
+						"kisiler" : [
+							{
+								"id":3,
+								"name":"Beytan"
+							}
+						]
+					},
+					{
+						"id":4,
+						"name" : "Sandalye 4",
+						"kisiler" : [
+							{
+								"id":4,
+								"name":"Burak"
+							}
+						]
+					}
+					
+				]
+			},
+			{
+				"id" : 3,
+				"name":"KRALLARIN MASASI",
+				"sandalyeler":[
+					{
+						"id":1,
+						"name" : "Sandalye 1",
+						"kisiler" : [
+							{
+								"id":1,
+								"name":"Mert"
+							}
+						]
+					},
+					{
+						"id":2,
+						"name" : "Sandalye 2",
+						"kisiler" : [
+							{
+								"id":2,
+								"name":"Onur"
+							}
+						]
+					},
+					{
+						"id":3,
+						"name" : "Sandalye 3",
+						"kisiler" : [
+							{
+								"id":3,
+								"name":"Yeşim"
+							}
+						]
+					},
+					{
+						"id":4,
+						"name" : "Sandalye 4",
+						"kisiler" : [
+							{
+								"id":4,
+								"name":"İrem"
+							}
+						]
+					}
+					
+				]
+			}
+			
+		]
+
+		
 	},
 	{
-		"isim":"Sabiha Gökçen Havalimanı",
-		"type":"appImage2"
+		"id" :2,
+		"name" : "Kat 2",
+		"masalar":[
+			{
+				"id" : 1,
+				"name":"HANGOVER MASASI",
+				"sandalyeler":[
+					{
+						"id":1,
+						"name" : "Sandalye 1",
+						"kisiler" : [
+							{
+								"id":1,
+								"name":"Mert"
+							}
+						]
+					},
+					{
+						"id":2,
+						"name" : "Sandalye 2",
+						"kisiler" : [
+							{
+								"id":2,
+								"name":"Onur"
+							}
+						]
+					},
+					{
+						"id":3,
+						"name" : "Sandalye 3",
+						"kisiler" : [
+							{
+								"id":3,
+								"name":"Yeşim"
+							}
+						]
+					},
+					{
+						"id":4,
+						"name" : "Sandalye 4",
+						"kisiler" : [
+							{
+								"id":4,
+								"name":"İrem"
+							}
+						]
+					}
+					
+				]
+			},
+			{
+				"id" : 2,
+				"name":"T1 MASASI",
+				"sandalyeler":[
+					{
+						"id":1,
+						"name" : "Sandalye 1",
+						"kisiler" : [
+							{
+								"id":1,
+								"name":"Murat"
+							}
+						]
+					},
+					{
+						"id":2,
+						"name" : "Sandalye 2",
+						"kisiler" : [
+							{
+								"id":2,
+								"name":"Baş"
+							}
+						]
+					},
+					{
+						"id":3,
+						"name" : "Sandalye 3",
+						"kisiler" : [
+							{
+								"id":3,
+								"name":"Beytan"
+							}
+						]
+					},
+					{
+						"id":4,
+						"name" : "Sandalye 4",
+						"kisiler" : [
+							{
+								"id":4,
+								"name":"Burak"
+							}
+						]
+					}
+					
+				]
+			}
+
+		]
+	},
+	{
+		"id" :3,
+		"name" : "Kat 3",
+		"masalar":[
+			{
+				"id" : 1,
+				"name":"AĞIR ABİLER MASASI",
+				"sandalyeler":[
+					{
+						"id":1,
+						"name" : "Sandalye 1",
+						"kisiler" : [
+							{
+								"id":1,
+								"name":"Mert"
+							}
+						]
+					},
+					{
+						"id":2,
+						"name" : "Sandalye 2",
+						"kisiler" : [
+							{
+								"id":2,
+								"name":"Onur"
+							}
+						]
+					},
+					{
+						"id":3,
+						"name" : "Sandalye 3",
+						"kisiler" : [
+							{
+								"id":3,
+								"name":"Yeşim"
+							}
+						]
+					},
+					{
+						"id":4,
+						"name" : "Sandalye 4",
+						"kisiler" : [
+							{
+								"id":4,
+								"name":"İrem"
+							}
+						]
+					}
+					
+				]
+			}
+
+		]
 	}
-]
+	
+	
+]	
+
+
