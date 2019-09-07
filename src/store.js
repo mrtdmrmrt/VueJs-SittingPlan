@@ -7,7 +7,9 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state : {
         dataList : [],
-        Tiklanan : null
+        KatTiklanan : null,
+        MasaTiklanan : null,
+        SandalyeTiklanan : null
 	},
 	mutations : {
         setData(state,data){
@@ -15,7 +17,18 @@ const store = new Vuex.Store({
             console.log(state.dataList)
         },
         setId(state,id){
-            state.Tiklanan = id
+            console.log("store setId")
+            state.KatTiklanan = id
+            
+            
+        },
+        setMasaId(state,id){
+            state.MasaTiklanan = id
+          
+        },
+        setSandalyeId(state,id){
+            state.SandalyeTiklanan = id
+          
         },
         addData(state,data){
             state.dataList = data;
@@ -37,6 +50,12 @@ const store = new Vuex.Store({
         },
         setId(vuexContext,id){
             vuexContext.commit("setId",id)
+        },
+        setMasaId(vuexContext,id){
+            vuexContext.commit("setMasaId",id)
+        },
+        setSandalyeId(vuexContext,id){
+            vuexContext.commit("setSandalyeId",id)
         }
 		
 	},
@@ -46,9 +65,17 @@ const store = new Vuex.Store({
             return state.dataList
            
         },
-        getTiklananId(state){
-            return state.Tiklanan
+        getKatTiklananId(state){
+            return state.KatTiklanan
+        },
+        getMasaTiklananId(state){
+            return state.MasaTiklanan
+        },
+        getSandalyeTiklananId(state){
+            return state.SandalyeTiklanan
         }
+        
+		
 		
 	}
 

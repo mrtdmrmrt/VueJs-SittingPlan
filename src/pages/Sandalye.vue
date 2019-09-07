@@ -2,6 +2,8 @@
     <div class="container">
       <SandalyeListesi 
       :vuexDataGet="vuexDataGet"
+      :vuexIdGet="vuexIdGet"
+      :vuexMasaIdGet="vuexMasaIdGet"
       @addFloorEvent="showAddContainer"/>
 
       <SandalyeEkle 
@@ -22,6 +24,14 @@ export default {
      computed: {
       vuexDataGet(){
         return this.$store.getters.getData
+      },
+      vuexIdGet(){
+      console.log("vuexIdGet istek yapıldı")
+      return this.$store.getters.getKatTiklananId
+      },
+      vuexMasaIdGet(){
+        
+        return this.$store.getters.getMasaTiklananId
       }
       
     },

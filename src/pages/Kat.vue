@@ -29,7 +29,7 @@ export default {
       return this.$store.getters.getData
     },
     vuexIdGet(){
-      return this.$store.getters.getTiklananId
+      return this.$store.getters.getKatTiklananId
     }
       
   },

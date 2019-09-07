@@ -1,22 +1,46 @@
 <template>
     <div class="container">
-        <h1 class="title"> FISHBONE Sandalye Listesi </h1>
+        <h1 class="title">{{vuexDataGet[vuexIdGet-1].masalar[vuexMasaIdGet-1].name}} Sandalye Listesi </h1>
         <hr>
+        <!--<h1>Kat ID{{vuexIdGet}}</h1>
+        <h1>MASA ID{{vuexMasaIdGet}}</h1>
+        -->
         <ul style="list-style-type:none;">
-            <li v-for="(data,index) in vuexDataGet[0]" :key="index">
-                <router-link to="/kisi" tag="a" class=""> {{data.masalar[index].sandalyeler[index]}} </router-link>
+            <!--masalar[vuexIdGet-1].sandalyeler-->
+            <li  v-for="(sandalye,index) in vuexDataGet[vuexIdGet-1].masalar[vuexMasaIdGet-1].sandalyeler" :key="index">
+                 <a href="#" @click="tik(sandalye.id)"  @click.prevent="$router.push('/kisi/')"  class="">{{sandalye.name}}</a>
             </li>
-            
+            <!--@click="tik(masa.id)"-->
         </ul>
         <button @click="$emit('addFloorEvent')"  class="btn btn-outline-info">YENİ</button>
     </div>
 </template>
 <script>
 export default {
+    data(){
+        return {
+         tiklanan : null
+        }
+    },
+     methods : {
+      tik(id){
+        this.tiklanan = id
+        this.$store.dispatch("setSandalyeId",this.tiklanan)
+        
+      }
+    },
     props : {
         vuexDataGet :{
             required : true,
             type : Array
+        },
+        vuexIdGet:{
+            type: Number,
+            required : true
+        },
+        vuexMasaIdGet:{
+            type : Number,
+            required: true
         }
     }
     

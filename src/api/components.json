@@ -73,27 +73,9 @@
 								"name":"Baş"
 							}
 						]
-					},
-					{
-						"id":3,
-						"name" : "Sandalye 3",
-						"kisiler" : [
-							{
-								"id":3,
-								"name":"Beytan"
-							}
-						]
-					},
-					{
-						"id":4,
-						"name" : "Sandalye 4",
-						"kisiler" : [
-							{
-								"id":4,
-								"name":"Burak"
-							}
-						]
 					}
+					
+					
 					
 				]
 			},

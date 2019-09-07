@@ -25,7 +25,8 @@ export default {
       return this.$store.getters.getData
     },
     vuexIdGet(){
-      return this.$store.getters.getTiklananId
+      console.log("vuexIdGet istek yapıldı")
+      return this.$store.getters.getKatTiklananId
     }
       
   },

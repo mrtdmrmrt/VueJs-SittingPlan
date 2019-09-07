@@ -7,7 +7,7 @@
       
             <li  v-for="(masa,index) in vuexDataGet[vuexIdGet-1].masalar" :key="index">
                <!-- <a>{{masa.name}}</a> -->
-                <a href="#"   @click.prevent="$router.push('/sandalye/')"  class="">{{masa.name}}</a>
+                <a href="#"   @click="tik(masa.id)"  @click.prevent="$router.push('/sandalye/')"  class="">{{masa.name}}</a>
 
             </li>
           
@@ -28,6 +28,20 @@
 
 <script>
 export default {
+      data(){
+        return {
+         tiklanan : null
+        }
+    },
+     methods : {
+      tik(id){
+        this.tiklanan = id
+        console.log("MasaListesi id",this.tiklanan);
+        this.$store.dispatch("setMasaId",this.tiklanan)
+        console.log("MasaId si gitti")
+        //console.log("created gibi tıklanan dispatch edildi")
+      }
+    },
   
     props : {
         vuexDataGet :{

@@ -1,10 +1,12 @@
 <template>
     <div class="container">
-        <h1 class="title"> FISHBONE Sandalye 1 de Oturan Kişi </h1>
+        <h1 class="title"> {{vuexDataGet[vuexIdGet-1].masalar[vuexMasaIdGet-1].name}} Sandalye {{vuexSandalyeIdGet}} de Oturan Kişi </h1>
         <hr>
         <ul style="list-style-type:none;">
         
-            <li><a href="#">Mert</a></li>
+            <li  v-for="(kisi,index) in vuexDataGet[vuexIdGet-1].masalar[vuexMasaIdGet-1].sandalyeler[vuexSandalyeIdGet-1].kisiler" :key="index">
+                 <a href="#"   @click.prevent="$router.push('/kisi/')"  class="">{{kisi.name}}</a>
+            </li>
             
         </ul>
         
@@ -12,6 +14,25 @@
 </template>
 <script>
 export default {
+  props : {
+        vuexDataGet :{
+            required : true,
+            type : Array
+        },
+        vuexIdGet:{
+            type: Number,
+            required : true
+        },
+        vuexMasaIdGet:{
+            type : Number,
+            required: true
+        },
+        vuexSandalyeIdGet:{
+            type : Number,
+            required: true
+        },
+
+    }
     
 }
 </script>
