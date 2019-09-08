@@ -1,14 +1,16 @@
 <template>
     <div class="container">
-        <h1 class="title">{{vuexDataGet[vuexIdGet-1].masalar[vuexMasaIdGet-1].name}} Sandalye Listesi </h1>
+      <!--  <h1 class="title">{{vuexDataGet[0].masalar[MasaID-1].name}} Sandalye Listesi </h1> -->
+        <h1 class="title">{{vuexDataGet[vuexKatIdGet-1].masalar[vuexMasaIdGet-1].name}} Sandalye Listesi </h1>
         <hr>
         <!--<h1>Kat ID{{vuexIdGet}}</h1>
         <h1>MASA ID{{vuexMasaIdGet}}</h1>
         -->
+      
         <ul style="list-style-type:none;">
             <!--masalar[vuexIdGet-1].sandalyeler-->
-            <li  v-for="(sandalye,index) in vuexDataGet[vuexIdGet-1].masalar[vuexMasaIdGet-1].sandalyeler" :key="index">
-                 <a href="#" @click="tik(sandalye.id)"  @click.prevent="$router.push('/kisi/')"  class="">{{sandalye.name}}</a>
+            <li  v-for="(sandalye,index) in vuexDataGet[vuexKatIdGet-1].masalar[vuexMasaIdGet-1].sandalyeler" :key="index">
+                 <a href="#" @click="tik(sandalye.id)"  @click.prevent="$router.push(sandalye.id+'/kisi/')"  class="">{{sandalye.name}}</a>
             </li>
             <!--@click="tik(masa.id)"-->
         </ul>
@@ -19,7 +21,14 @@
 export default {
     data(){
         return {
-         tiklanan : null
+            tiklanan : null,
+            MasaID : this.$route.params.id
+      
+        }
+    },
+    watch:{
+        "$route"(to,from){
+            this.MasaID =to.params.id
         }
     },
      methods : {
@@ -34,15 +43,25 @@ export default {
             required : true,
             type : Array
         },
-        vuexIdGet:{
+        vuexKatIdGet:{
             type: Number,
-            required : true
+            required : false
         },
         vuexMasaIdGet:{
-            type : Number,
-            required: true
+            type: Number,
+            required : false
         }
+    },
+    /*
+    created(){
+         this.$store.dispatch("setMasaId",this.MasaID)
     }
+    *//*
+     created(){
+        var currentUrl = window.location.pathname;
+        console.log(currentUrl);
+    }
+    */
     
 }
 </script>

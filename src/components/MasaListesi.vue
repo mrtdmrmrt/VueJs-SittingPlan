@@ -1,14 +1,14 @@
 <template>
     <div class="container">
-        <h1 class="title">Kat {{vuexIdGet}} İçin Masa Listesi</h1>
+        <h1 class="title">Kat {{vuexKatIdGet}} İçin Masa Listesi</h1>
         <hr>
        <!-- {{vuexDataGet[0].masalar[2].name}}-->
         <ul style="list-style-type:none;">
-      
-            <li  v-for="(masa,index) in vuexDataGet[vuexIdGet-1].masalar" :key="index">
+           
+            <li  v-for="(masa,index) in vuexDataGet[KatID-1].masalar" :key="index">
                <!-- <a>{{masa.name}}</a> -->
-                <a href="#"   @click="tik(masa.id)"  @click.prevent="$router.push('/sandalye/')"  class="">{{masa.name}}</a>
-
+                <a href="#"   @click="tik(masa.id)"  @click.prevent="$router.push(masa.id +'/sandalye/')"  class="">{{masa.name}}</a>
+                
             </li>
           
         </ul>   
@@ -30,7 +30,8 @@
 export default {
       data(){
         return {
-         tiklanan : null
+        tiklanan : null,
+        KatID : this.$route.params.id
         }
     },
      methods : {
@@ -42,18 +43,34 @@ export default {
         //console.log("created gibi tıklanan dispatch edildi")
       }
     },
+    watch:{
+        "$route"(to,from){
+            this.KatID =to.params.id
+        }
+    },
   
     props : {
         vuexDataGet :{
             required : true,
             type : Array
         },
-        vuexIdGet:{
+        vuexKatIdGet:{
             type: Number,
-            required : true
+            required : false
         }
      
+    },
+    /*
+    created(){
+         this.$store.dispatch("setId",this.KatID)
     }
+    */
+    /*
+    created(){
+        var currentUrl = window.location.pathname;
+        console.log(currentUrl);
+    }
+    */
   
     
 }

@@ -3,6 +3,7 @@
   <div class="container">
     <KatListesi 
     :vuexDataGet="vuexDataGet"
+    :vuexKatGet="vuexKatGet"
     
     @addFloorEvent="showAddContainer"/>
 
@@ -28,8 +29,8 @@ export default {
     vuexDataGet(){
       return this.$store.getters.getData
     },
-    vuexIdGet(){
-      return this.$store.getters.getKatTiklananId
+    vuexKatGet(){
+      return this.$store.getters.getEklenenKat
     }
       
   },

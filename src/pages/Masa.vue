@@ -2,7 +2,7 @@
     <div class="container">
        <MasaListesi 
        :vuexDataGet="vuexDataGet"
-       :vuexIdGet="vuexIdGet"
+       :vuexKatIdGet="vuexKatIdGet"
        @addFloorEvent="showAddContainer"/>
        <MasaEkle 
         @hideAddContainerEvent ="showAdd = false"
@@ -24,7 +24,7 @@ export default {
     vuexDataGet(){
       return this.$store.getters.getData
     },
-    vuexIdGet(){
+    vuexKatIdGet(){
       console.log("vuexIdGet istek yapıldı")
       return this.$store.getters.getKatTiklananId
     }
@@ -37,7 +37,8 @@ export default {
     methods : {
       showAddContainer(){
         this.showAdd = true
-      },
+    }
+    
       /*
       tik(id){
         this.tiklanan = id

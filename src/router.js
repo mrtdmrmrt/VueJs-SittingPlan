@@ -13,9 +13,9 @@ Vue.use(VueRouter)
 export const router = new VueRouter({
 	routes : [
 		{path : "/" , component : Kat },
-		{path : "/masa" , component : Masa },
-		{path : "/sandalye" , component : Sandalye },
-		{path : "/Kisi" , component : Kisi }
+		{path : "/:id/masa" , component : Masa },
+		{path : "/:id/masa/:id/sandalye" , component : Sandalye },
+		{path : "/:id/masa/:id/sandalye/:id/Kisi" , component : Kisi }
 	],
 	mode : "history"
 })

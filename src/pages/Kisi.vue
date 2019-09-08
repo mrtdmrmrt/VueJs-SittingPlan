@@ -2,7 +2,7 @@
     <div class="container">
       <KisiListesi 
       :vuexDataGet="vuexDataGet"
-      :vuexIdGet="vuexIdGet" 
+      :vuexKatIdGet="vuexKatIdGet" 
       :vuexMasaIdGet="vuexMasaIdGet"
       :vuexSandalyeIdGet="vuexSandalyeIdGet"/>
     </div>
@@ -24,7 +24,7 @@ export default {
         vuexDataGet(){
             return this.$store.getters.getData
         },
-        vuexIdGet(){
+        vuexKatIdGet(){
             return this.$store.getters.getKatTiklananId
         },
         vuexMasaIdGet(){

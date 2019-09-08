@@ -2,8 +2,9 @@
     <div class="container">
       <SandalyeListesi 
       :vuexDataGet="vuexDataGet"
-      :vuexIdGet="vuexIdGet"
+      :vuexKatIdGet="vuexKatIdGet"
       :vuexMasaIdGet="vuexMasaIdGet"
+
       @addFloorEvent="showAddContainer"/>
 
       <SandalyeEkle 
@@ -18,14 +19,14 @@ export default {
     data(){
       return {
         showAdd : false,
-    
+        MasaID : this.$route.params.id
       }
     },
      computed: {
       vuexDataGet(){
         return this.$store.getters.getData
       },
-      vuexIdGet(){
+      vuexKatIdGet(){
       console.log("vuexIdGet istek yapıldı")
       return this.$store.getters.getKatTiklananId
       },
@@ -33,6 +34,7 @@ export default {
         
         return this.$store.getters.getMasaTiklananId
       }
+     
       
     },
     components :{

@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-        <h1 class="title"> {{vuexDataGet[vuexIdGet-1].masalar[vuexMasaIdGet-1].name}} Sandalye {{vuexSandalyeIdGet}} de Oturan Kişi </h1>
+        <h1 class="title"> {{vuexDataGet[vuexKatIdGet-1].masalar[vuexMasaIdGet-1].name}} Sandalye {{vuexSandalyeIdGet}} de Oturan Kişi </h1>
         <hr>
         <ul style="list-style-type:none;">
         
-            <li  v-for="(kisi,index) in vuexDataGet[vuexIdGet-1].masalar[vuexMasaIdGet-1].sandalyeler[vuexSandalyeIdGet-1].kisiler" :key="index">
-                 <a href="#"   @click.prevent="$router.push('/kisi/')"  class="">{{kisi.name}}</a>
+            <li  v-for="(kisi,index) in vuexDataGet[vuexKatIdGet-1].masalar[vuexMasaIdGet-1].sandalyeler[vuexSandalyeIdGet-1].kisiler" :key="index">
+                 <a href="#" class="">{{kisi.name}}</a>
             </li>
             
         </ul>
@@ -19,7 +19,7 @@ export default {
             required : true,
             type : Array
         },
-        vuexIdGet:{
+        vuexKatIdGet:{
             type: Number,
             required : true
         },
@@ -32,7 +32,17 @@ export default {
             required: true
         },
 
+    },
+    created(){
+       
+        var currentUrl = window.location.pathname;
+        console.log(currentUrl);
+        var diziURL = []
+        diziURL.push(currentUrl.split("/"))
+        console.log(diziURL)
+    
     }
+   
     
 }
 </script>

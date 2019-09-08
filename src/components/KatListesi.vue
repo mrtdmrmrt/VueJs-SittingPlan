@@ -2,15 +2,16 @@
     <div class="container">
         <h1 class="title"> Kat Listesi </h1>
         <hr>
+       
         <ul style="list-style-type:none;">
           <li v-for="(data,index) in vuexDataGet" :key="index">
             <!--<router-link @click="tik(data.id)" class="" tag="a" to="/masa/"> {{data.name}}</router-link>-->
-           <a href="#"  @click="tik(data.id)" @click.prevent="$router.push('/masa/')"  class="">{{data.name}}</a>
+           <a href="#"  @click="tik(data.id)" @click.prevent="$router.push(data.id +'/masa/')"  class="">{{data.name}}</a>
 
            <!-- <a href="#"  @click="tik(data.id)" @click.prevent="$router.push('/masa/'+data.id)"  class="btn btn-outline-info btn-sm">{{data.name}}</a> -->
           </li>
             
-          
+        <li><a href="#">{{vuexKatGet}}</a></li>  
         </ul>
         <button @click="$emit('addFloorEvent')" class="btn btn-outline-info">YENİ</button>
 
@@ -31,6 +32,10 @@ export default {
         vuexDataGet : {
             required : true,
             type : Array
+        },
+        vuexKatGet:{
+          required : true,
+          type : String
         }
         
     },
@@ -42,8 +47,7 @@ export default {
         console.log("created gibi tıklanan dispatch edildi")
       }
     }
-   
-    
+     
 }
 </script>
 
