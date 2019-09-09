@@ -1,10 +1,6 @@
 <template>
     <div class="container">
-      <KisiListesi 
-      :vuexDataGet="vuexDataGet"
-      :vuexKatIdGet="vuexKatIdGet" 
-      :vuexMasaIdGet="vuexMasaIdGet"
-      :vuexSandalyeIdGet="vuexSandalyeIdGet"/>
+      <KisiListesi />
     </div>
 </template>
 <script>
@@ -15,32 +11,13 @@ export default {
     },
     data(){
         return {
-        showAdd : false,
-        tiklanan: null
+            showAdd : false
+        
         
         }
-    },
-    computed: {
-        vuexDataGet(){
-            return this.$store.getters.getData
-        },
-        vuexKatIdGet(){
-            return this.$store.getters.getKatTiklananId
-        },
-        vuexMasaIdGet(){
-            return this.$store.getters.getMasaTiklananId
-        },
-        vuexSandalyeIdGet(){
-            return this.$store.getters.getSandalyeTiklananId
-        }
-        
-        
     }
-    
-    
-     
-    
-  
+   
+
 
 }
 </script>

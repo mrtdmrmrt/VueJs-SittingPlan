@@ -1,24 +1,15 @@
 <template>
     <div class="container">
-        <h1 class="title">Kat {{vuexKatIdGet}} İçin Masa Listesi</h1>
+        <h1 class="title">Kat {{katId}} İçin Masa Listesi</h1>
         <hr>
-       <!-- {{vuexDataGet[0].masalar[2].name}}-->
+        
         <ul style="list-style-type:none;">
-           
-            <li  v-for="(masa,index) in vuexDataGet[KatID-1].masalar" :key="index">
-               <!-- <a>{{masa.name}}</a> -->
-                <a href="#"   @click="tik(masa.id)"  @click.prevent="$router.push(masa.id +'/sandalye/')"  class="">{{masa.name}}</a>
-                
+            
+            <li  v-for="(table,index) in filteredArray({katId:katId}).masalar" :key="index">
+                <router-link :to="{ name: 'sandalye', params: { katId: katId, masaId:table.id }}">{{table.name}}</router-link>
             </li>
-          
+            
         </ul>   
-                
-                <!--<a>{{data[1].masalar[0].name}}</a>-->
-               
-           
-               <!--   <router-link to="/sandalye" tag="a" class=""> {{masa.masalar[0].name}} </router-link> -->
-               
-               
            
         
         <button @click="$emit('addFloorEvent')"  class="btn btn-outline-info">YENİ</button>
@@ -27,52 +18,33 @@
 
 
 <script>
+import {dataMixin} from "../dataMixin"
 export default {
-      data(){
+    mixins : [dataMixin],
+    data(){
         return {
-        tiklanan : null,
-        KatID : this.$route.params.id
+            tableSittingPlanData: [],
+            katId : parseInt(this.$route.params.katId)
         }
     },
-     methods : {
-      tik(id){
-        this.tiklanan = id
-        console.log("MasaListesi id",this.tiklanan);
-        this.$store.dispatch("setMasaId",this.tiklanan)
-        console.log("MasaId si gitti")
-        //console.log("created gibi tıklanan dispatch edildi")
-      }
-    },
-    watch:{
-        "$route"(to,from){
-            this.KatID =to.params.id
+    methods : {
+        filteredArray(filter)
+        {
+          var filteredArray = this.tableSittingPlanData.filter(function(obj,ind)
+          {
+              return obj.id === filter.katId;
+          });
+          return (filteredArray.length >0)?filteredArray[0]:[];
         }
     },
-  
-    props : {
-        vuexDataGet :{
-            required : true,
-            type : Array
-        },
-        vuexKatIdGet:{
-            type: Number,
-            required : false
-        }
+    created() {
+		this.getSittingPlanData()
+			.then(response => {
+					this.tableSittingPlanData = response.data;
+			})
+		} 
      
-    },
-    /*
-    created(){
-         this.$store.dispatch("setId",this.KatID)
-    }
-    */
-    /*
-    created(){
-        var currentUrl = window.location.pathname;
-        console.log(currentUrl);
-    }
-    */
-  
-    
+ 
 }
 </script>
 

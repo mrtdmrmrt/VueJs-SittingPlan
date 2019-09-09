@@ -1,68 +1,77 @@
 <template>
     <div class="container">
-      <!--  <h1 class="title">{{vuexDataGet[0].masalar[MasaID-1].name}} Sandalye Listesi </h1> -->
-        <h1 class="title">{{vuexDataGet[vuexKatIdGet-1].masalar[vuexMasaIdGet-1].name}} Sandalye Listesi </h1>
+        <h1 class="title">{{SittingPlanDataTable.name}} Sandalye Listesi </h1> 
         <hr>
-        <!--<h1>Kat ID{{vuexIdGet}}</h1>
-        <h1>MASA ID{{vuexMasaIdGet}}</h1>
-        -->
-      
+
+        
         <ul style="list-style-type:none;">
-            <!--masalar[vuexIdGet-1].sandalyeler-->
-            <li  v-for="(sandalye,index) in vuexDataGet[vuexKatIdGet-1].masalar[vuexMasaIdGet-1].sandalyeler" :key="index">
-                 <a href="#" @click="tik(sandalye.id)"  @click.prevent="$router.push(sandalye.id+'/kisi/')"  class="">{{sandalye.name}}</a>
+            <li v-for="(chair,index) in chairSittingPlanData" :key="index">
+                <router-link :to="{ name: 'kisi', params: { katId: katId, masaId:masaId, sandalyeId: chair.id}}">{{chair.name}}</router-link>
             </li>
-            <!--@click="tik(masa.id)"-->
         </ul>
         <button @click="$emit('addFloorEvent')"  class="btn btn-outline-info">YENİ</button>
+        
     </div>
 </template>
 <script>
+import {dataMixin} from "../dataMixin"
 export default {
+    mixins : [dataMixin],
     data(){
         return {
-            tiklanan : null,
-            MasaID : this.$route.params.id
-      
-        }
-    },
-    watch:{
-        "$route"(to,from){
-            this.MasaID =to.params.id
+            SittingPlanDataTable:[],
+            chairSittingPlanData:[],
+            katId : this.$route.params.katId,
+            masaId : this.$route.params.masaId
         }
     },
      methods : {
-      tik(id){
-        this.tiklanan = id
-        this.$store.dispatch("setSandalyeId",this.tiklanan)
         
-      }
-    },
-    props : {
-        vuexDataGet :{
-            required : true,
-            type : Array
+        filteredArray(filter)
+        {
+            var that = this;
+            that.getSittingPlanData()
+            .then(function(katlar)
+            {
+                var katIndex = that.findWithAttr(katlar.data, 'id', parseInt(filter.katId));
+                if(katIndex  !== -1)
+                {
+                 
+                    var masaIndex = that.findWithAttr(katlar.data[katIndex].masalar, 'id', parseInt(filter.masaId));
+                    that.SittingPlanDataTable = katlar.data[katIndex].masalar[masaIndex]
+                  
+                    if(masaIndex !== -1)
+                    {
+                        
+                        that.chairSittingPlanData =  katlar.data[katIndex].masalar[masaIndex].sandalyeler;
+                    }
+                }
+
+            },function(error)
+            {
+                console.log("Hata")
+            })
+
+
         },
-        vuexKatIdGet:{
-            type: Number,
-            required : false
-        },
-        vuexMasaIdGet:{
-            type: Number,
-            required : false
+        findWithAttr(array, property, value) {
+            for(var i = 0; i < array.length; i += 1) {
+                if(array[i][property] === value) {
+                    return i;
+                }
+            }
+            return -1;
         }
-    },
-    /*
-    created(){
-         this.$store.dispatch("setMasaId",this.MasaID)
-    }
-    *//*
-     created(){
-        var currentUrl = window.location.pathname;
-        console.log(currentUrl);
-    }
-    */
-    
+
+    },created()
+        {
+            
+            this.filteredArray({katId:this.katId,masaId:this.masaId})
+            this.getSittingPlanData()
+			.then(response => {
+					this.SittingPlanData = response.data;
+			})
+        }
 }
 </script>
 <style scoped>

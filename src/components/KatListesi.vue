@@ -2,18 +2,20 @@
     <div class="container">
         <h1 class="title"> Kat Listesi </h1>
         <hr>
-       
+        
         <ul style="list-style-type:none;">
-          <li v-for="(data,index) in vuexDataGet" :key="index">
+          <li v-for="(floor,index) in floorSittingPlanData" :key="index">
             <!--<router-link @click="tik(data.id)" class="" tag="a" to="/masa/"> {{data.name}}</router-link>-->
-           <a href="#"  @click="tik(data.id)" @click.prevent="$router.push(data.id +'/masa/')"  class="">{{data.name}}</a>
+            <!--<a href="#"  @click="tik(data.id)" @click.prevent="$router.push({ name: 'masa', params: { katId: data.id } })"  class="">{{data.name}}</a>-->
+            <!-- <a href="#"  @click="tik(data.id)" @click.prevent="$router.push('/masa/'+data.id)"  class="btn btn-outline-info btn-sm">{{data.name}}</a> -->
 
-           <!-- <a href="#"  @click="tik(data.id)" @click.prevent="$router.push('/masa/'+data.id)"  class="btn btn-outline-info btn-sm">{{data.name}}</a> -->
+            <router-link :to="{ name: 'masa', params: { katId: floor.id }}">{{floor.name}}</router-link>
+          
           </li>
             
-        <li><a href="#">{{vuexKatGet}}</a></li>  
+        <li><a href="#">{{vuexKatGet}}</a></li>  <!--Ekle Butonuna tıkladıktan sonra buraya eklenen gelir-->
         </ul>
-        <button @click="$emit('addFloorEvent')" class="btn btn-outline-info">YENİ</button>
+        <button @click="$emit('addFloorEvent')" class="btn btn-outline-info">YENİ</button> 
 
 
         
@@ -22,31 +24,29 @@
 
 
 <script>
+import {dataMixin} from "../dataMixin"
 export default {
+   mixins : [dataMixin],
   data(){
     return {
-      tiklanan : null
+      floorSittingPlanData: [],
+      katId : this.$route.params.katId
     }
   },
    props : {
-        vuexDataGet : {
-            required : true,
-            type : Array
-        },
+       
         vuexKatGet:{
           required : true,
           type : String
         }
         
     },
-    methods : {
-      tik(id){
-        this.tiklanan = id
-        console.log(this.tiklanan);
-        this.$store.dispatch("setId",this.tiklanan)
-        console.log("created gibi tıklanan dispatch edildi")
-      }
-    }
+     created() {
+			this.getSittingPlanData()
+			.then(response => {
+					this.floorSittingPlanData = response.data;
+			})
+		} 
      
 }
 </script>

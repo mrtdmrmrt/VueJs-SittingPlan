@@ -2,9 +2,14 @@
 <template>
 <div>
   <Header />
-    <!--<Test :vuexDataGet="vuexDataGet" />-->
-  <router-view></router-view>
-
+   <transition
+   enter-class=""
+   enter-active-class="animated bounceInLeft"
+   leave-class=""
+   leave-active-class="" 
+   appear>
+    <router-view></router-view>
+   </transition>
 <div>
 </div>   
 
@@ -12,7 +17,6 @@
 </template>
 <script>
 import Header from "./components/Header"
-import Test from "./components/Test"
 
 import Kat from "./pages/Kat"
 //import Masa from "./pages/Masa"
@@ -23,28 +27,19 @@ export default {
       componentsLists:[]
     }
   },
-  computed: {
-    vuexDataGet(){
-      return this.$store.getters.getData
-      
-    }
-  },
   components : {
-    Header,
-    Test
+    Header
+  
    // Kat,
   //  Masa
-  },
-  created(){
-    this.$store.dispatch("getComponentConfig")
-
-
   }
-  
 }
 </script>
 <style>
+.enter-active-class {
+    transition: opacity 0.5s;
 
+  }
 .add-container {
       background-color: rgba(0, 0, 0, .8);
       position: absolute;

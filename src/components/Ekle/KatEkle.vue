@@ -21,7 +21,7 @@ export default {
     },
     methods : {
         ekle(){
-            //alert(this.katEkle)
+           
             this.$store.dispatch("setFloor",this.katEkle)
         }
     }
