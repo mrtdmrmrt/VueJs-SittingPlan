@@ -1,15 +1,17 @@
 <template>
     <div class="container">
-       <MasaListesi 
+       <TableList 
        @addFloorEvent="showAddContainer"/>
-       <MasaEkle 
+       <AddTable 
         @hideAddContainerEvent ="showAdd = false"
         :class="{'show-add-container' : showAdd} "/>
     </div>
 </template>
+
 <script>
-import MasaListesi from "../components/MasaListesi"
-import MasaEkle from "../components/Ekle/MasaEkle"
+import TableList from "../components/TableList"
+import AddTable from "../components/Add/AddTable"
+
 export default {
   data(){
     return {
@@ -18,8 +20,8 @@ export default {
   
   },
     components :{
-      MasaListesi,
-      MasaEkle
+      TableList,
+      AddTable
     },
     methods : {
       showAddContainer(){
@@ -30,6 +32,3 @@ export default {
   
 }
 </script>
-<style scoped>
-
-</style>

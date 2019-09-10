@@ -4,8 +4,8 @@
             <div class="card-body">
                 <h5 class="card-title">Kat Ekle</h5>
                 <input v-model="katEkle" type="text" class="form-control mt-3 mb-3" placeholder="Kat ismi giriniz..">
-                <a @click="$emit('hideAddContainerEvent',true)"  class="card-link btn btn-sm btn-outline-danger">Vazgeç</a>
-                <a  @click="$emit('hideAddContainerEvent',ekle(),true)" class="card-link btn btn-sm btn-outline-warning">Ekle</a>
+                <a @click="$emit('hideAddContainerEvent',true)"  class="card-link btn btn-md danger">Vazgeç</a>
+                <a @click="$emit('hideAddContainerEvent',ekle(),true)" class="card-link btn btn-md orange">Ekle</a>
             </div>
         </div>
     </div>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+
 export default {
     data(){
         return{
@@ -21,16 +22,33 @@ export default {
     },
     methods : {
         ekle(){
-           
+            //vuex de ki action içinde ki setFloor a this.katEkle gönderildi
             this.$store.dispatch("setFloor",this.katEkle)
         }
     }
 
 }
 </script>
+
 <style scoped>
-a {
-    cursor: pointer;
+.card-body .danger{
+    background-color: red;
+    color : white;
+}
+.card-body .danger:hover{
+    color:red;
+    background-color: white;
+    border-color: red;
 }
 
+
+.card-body .orange{
+    background-color: orange;
+    color : white;
+}
+.card-body .orange:hover{
+    color:orange;
+    background-color: white;
+    border-color: orange;
+}
 </style>

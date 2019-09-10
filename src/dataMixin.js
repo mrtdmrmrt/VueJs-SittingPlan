@@ -3,6 +3,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import axios from "axios"
 
+//  src/api/sittingPlanData.json a axios kullanarak data ya get isteği yağıldığı yer
 export const dataMixin = {
     methods : {
         getSittingPlanData (){

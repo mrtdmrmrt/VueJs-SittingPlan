@@ -6,17 +6,17 @@ import {router} from "./router"
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-	state : {  katEkle : ""},
+	state : {  addFloor : ""},
 
 
-	mutations : {addFloor(state,data){state.katEkle=data;}},
+	mutations : {addFloor(state,data){state.addFloor=data;}},
 		
 	
 	actions : {setFloor(vuexContext,data){vuexContext.commit("addFloor",data)}},
 	
         
-	getters : {getEklenenKat(state){
-                        return state.katEkle
+	getters : {getAddedFloor(state){
+                        return state.addFloor
                 }
        
 	}

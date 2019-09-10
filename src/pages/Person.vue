@@ -1,25 +1,25 @@
 <template>
     <div class="container">
-      <KisiListesi 
+      <PersonList 
        @addFloorEvent="showAddContainer"/>
-       <KisiEkle 
+       <AddPerson 
         @hideAddContainerEvent ="showAdd = false"
         :class="{'show-add-container' : showAdd} "/>
     </div>
 </template>
+
 <script>
-import KisiListesi from "../components/KisiListesi"
-import KisiEkle from "../components/Ekle/KisiEkle"
+import PersonList from "../components/PersonList"
+import AddPerson from "../components/Add/AddPerson"
+
 export default {
     components : {
-        KisiListesi,
-        KisiEkle
+        PersonList,
+        AddPerson
     },
     data(){
         return {
             showAdd : false
-        
-        
         }
     },
     methods : {
@@ -28,11 +28,5 @@ export default {
       }
     
     }
-   
-
-
 }
 </script>
-<style scoped>
-
-</style>

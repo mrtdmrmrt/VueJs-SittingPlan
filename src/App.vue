@@ -16,25 +16,17 @@
 </div>
 </template>
 <script>
+
 import Header from "./components/Header"
 
-import Kat from "./pages/Kat"
-//import Masa from "./pages/Masa"
-
 export default {
-  data(){
-    return {
-      componentsLists:[]
-    }
-  },
   components : {
     Header
-  
-   // Kat,
-  //  Masa
+
   }
 }
 </script>
+
 <style>
 .enter-active-class {
     transition: opacity 0.5s;
@@ -49,9 +41,18 @@ export default {
       height: 100%;
       z-index: 1;
       visibility: hidden;
+      
       /*visibility görünüp görünmemesini sağlar bu yüzden update de bununla oynuyca*/
     }
     .show-add-container{
       visibility: visible!important;
     }
+    .card{
+       border-radius: 10px;
+      border: 2px solid orange;
+    }
+    .card-body a{
+    cursor: pointer;
+}
+
 </style>

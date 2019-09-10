@@ -1,6 +1,6 @@
 <template>
 
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light"> 
         <a class="navbar-brand">Sitting Plan</a>
     </nav>
   

@@ -1,28 +1,27 @@
 <template>
     <div class="container">
         <h1 class="title">{{SittingPlanDataTable.name}} Sandalye Listesi </h1> 
-        <hr>
-
-        
-        <ul style="list-style-type:none;">
+        <hr style="border: 2px solid orange;">
+        <ul style="list-style-type:none;" class="list-group">
             <li v-for="(chair,index) in chairSittingPlanData" :key="index">
-                <router-link :to="{ name: 'kisi', params: { katId: katId, masaId:masaId, sandalyeId: chair.id}}">{{chair.name}}</router-link>
+                <router-link class="list-group-item" :to="{ name: 'person', params: { floorId: floorId, tableId:tableId, chairId: chair.id}}">{{chair.name}}</router-link>
             </li>
         </ul>
-        <button @click="$emit('addFloorEvent')"  class="btn btn-outline-info">YENİ</button>
-        
+        <button @click="$emit('addFloorEvent')"  class="btn orange">YENİ</button>
     </div>
 </template>
+
 <script>
 import {dataMixin} from "../dataMixin"
+
 export default {
     mixins : [dataMixin],
     data(){
         return {
             SittingPlanDataTable:[],
             chairSittingPlanData:[],
-            katId : this.$route.params.katId,
-            masaId : this.$route.params.masaId
+            floorId : this.$route.params.floorId,
+            tableId : this.$route.params.tableId
         }
     },
      methods : {
@@ -33,11 +32,11 @@ export default {
             that.getSittingPlanData()
             .then(function(katlar)
             {
-                var katIndex = that.findWithAttr(katlar.data, 'id', parseInt(filter.katId));
+                var katIndex = that.findWithAttr(katlar.data, 'id', parseInt(filter.floorId));
                 if(katIndex  !== -1)
                 {
                  
-                    var masaIndex = that.findWithAttr(katlar.data[katIndex].masalar, 'id', parseInt(filter.masaId));
+                    var masaIndex = that.findWithAttr(katlar.data[katIndex].masalar, 'id', parseInt(filter.tableId));
                     that.SittingPlanDataTable = katlar.data[katIndex].masalar[masaIndex]
                   
                     if(masaIndex !== -1)
@@ -66,7 +65,7 @@ export default {
     },created()
         {
             
-            this.filteredArray({katId:this.katId,masaId:this.masaId})
+            this.filteredArray({floorId:this.floorId,tableId:this.tableId})
             this.getSittingPlanData()
 			.then(response => {
 					this.SittingPlanData = response.data;
@@ -74,10 +73,36 @@ export default {
         }
 }
 </script>
+
 <style scoped>
-.btn{
-    margin-top: 10px;
-    margin-left: 30%;
+.list-group-item:hover{
+    border:1px solid orange;
+    box-shadow: 1px 1px 5px #ff9800;
+
+}
+.list-group li a{
+  text-decoration: none;
+  color : #333;
+}
+.btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 10px 40px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top : 10px;
+  margin-left: 40%;
+  border-radius: 25px;
+}
+.orange {
+  border-color: #ff9800;
+  color: orange;
+}
+
+.orange:hover {
+  background: #ff9800;
+  color: white;
 }
 li{
     margin-top: 10px;
@@ -86,9 +111,10 @@ li{
   font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
-  font-weight: 300;
-  font-size: 50px;
+  font-weight: 100;
+  font-size: 35px;
   color: #35495e;
   letter-spacing: 1px;
+  margin-top:20px;
 }
 </style>

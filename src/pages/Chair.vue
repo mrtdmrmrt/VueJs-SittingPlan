@@ -1,36 +1,32 @@
 <template>
     <div class="container">
-      <SandalyeListesi 
+      <ChairList 
       @addFloorEvent="showAddContainer"/>
 
-      <SandalyeEkle 
+      <AddChair 
       @hideAddContainerEvent ="showAdd = false"
       :class="{'show-add-container' : showAdd} "/>
     </div>
 </template>
 <script>
-import SandalyeListesi from "../components/SandalyeListesi"
-import SandalyeEkle from "../components/Ekle/SandalyeEkle"
+import ChairList from "../components/ChairList"
+import AddChair from "../components/Add/AddChair"
+
 export default {
     data(){
       return {
         showAdd : false
-        
       }
     },
      
     components :{
-      SandalyeListesi,
-      SandalyeEkle
+      ChairList,
+      AddChair
     },
     methods : {
      showAddContainer(){
       this.showAdd = true
-     
     }
   }
 }
 </script>
-<style scoped>
-
-</style>
