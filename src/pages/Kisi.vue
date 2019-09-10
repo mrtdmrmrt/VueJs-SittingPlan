@@ -1,13 +1,19 @@
 <template>
     <div class="container">
-      <KisiListesi />
+      <KisiListesi 
+       @addFloorEvent="showAddContainer"/>
+       <KisiEkle 
+        @hideAddContainerEvent ="showAdd = false"
+        :class="{'show-add-container' : showAdd} "/>
     </div>
 </template>
 <script>
 import KisiListesi from "../components/KisiListesi"
+import KisiEkle from "../components/Ekle/KisiEkle"
 export default {
     components : {
-        KisiListesi
+        KisiListesi,
+        KisiEkle
     },
     data(){
         return {
@@ -15,6 +21,12 @@ export default {
         
         
         }
+    },
+    methods : {
+      showAddContainer(){
+        this.showAdd = true
+      }
+    
     }
    
 

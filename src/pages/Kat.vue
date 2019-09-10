@@ -1,6 +1,6 @@
 
 <template>
-  <div class="container">
+  <div class="container kat">
     <KatListesi 
     :vuexKatGet="vuexKatGet"
     
@@ -44,3 +44,16 @@ export default {
   
 }
 </script>
+<style scoped>
+.kat {
+   
+      margin-top : 10px;
+		  border-radius: 5px;
+		  border: 1px solid #ededed;
+		  margin-left: 10px;
+      
+    }
+    .kat:hover{
+      box-shadow: #666;
+    }
+</style>

@@ -2,10 +2,10 @@
     <div class="add-container container-fluid d-flex flex-column justify-content-center align-items-center">
         <div class="card shadow pt-2 pb-2" style="width: 30rem;">
             <div class="card-body">
-                <h5 class="card-title">Kat Ekle</h5>
-                <input v-model="katEkle" type="text" class="form-control mt-3 mb-3" placeholder="Kat ismi giriniz..">
+                <h5 class="card-title">Kişi Güncelle</h5>
+                <input type="text" class="form-control mt-3 mb-3" placeholder="Kişinin ismini giriniz..">
                 <a @click="$emit('hideAddContainerEvent',true)"  class="card-link btn btn-sm btn-outline-danger">Vazgeç</a>
-                <a  @click="$emit('hideAddContainerEvent',ekle(),true)" class="card-link btn btn-sm btn-outline-warning">Ekle</a>
+                <a @click="$emit('hideAddContainerEvent',true)" class="card-link btn btn-sm btn-outline-warning">Güncelle</a>
             </div>
         </div>
     </div>
@@ -14,17 +14,6 @@
 
 <script>
 export default {
-    data(){
-        return{
-            katEkle : ""
-        }
-    },
-    methods : {
-        ekle(){
-           
-            this.$store.dispatch("setFloor",this.katEkle)
-        }
-    }
 
 }
 </script>
@@ -32,5 +21,4 @@ export default {
 a {
     cursor: pointer;
 }
-
 </style>

@@ -10,6 +10,7 @@
             </li>
             
         </ul>
+        <button @click="$emit('addFloorEvent')"  class="btn btn-outline-info">Güncelle</button>
         
     </div>
 </template>
@@ -85,6 +86,10 @@ export default {
 </script>
 
 <style scoped>
+.btn{
+    margin-top: 10px;
+    margin-left: 30%;
+}
 
 li{
     margin-top: 10px;

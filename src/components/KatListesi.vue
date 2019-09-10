@@ -53,6 +53,7 @@ export default {
 
 
 <style>
+
 .btn {
     margin-top : 10px;
     margin-left: 40%;
@@ -70,4 +71,5 @@ li{
   color: #35495e;
   letter-spacing: 1px;
 }
+
 </style>
