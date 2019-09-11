@@ -1,13 +1,18 @@
 <template>
     <div class="container">
-        <h1 class="title"> {{SittingPlanDataChair}} Sandalye {{chairId}} de Oturan Kişi </h1>
+        <h1 class="title">Sandalye {{chairId}} de Oturan Kişi </h1>
         <hr style="border: 2px solid orange;">
+        <Alert v-if="filteredArray({floorId:floorId}) == false"/>
         <ul style="list-style-type:none;" class="list-group">
-        
+           
+        <!--
             <li class="list-group-item" v-for="(person,index) in personsSittingPlanData" :key="index">
                 <router-link  :to="{ name: 'person', params: { floorId: floorId, tableId:tableId, chairId:chairId, personId:person.id}}">{{person.name}}</router-link>
             </li>
-            
+            -->
+            <li  v-for="(chair,index) in filteredArray({chairId:chairId})" :key="index">
+                <router-link class="list-group-item" :to="{ name: 'person', params: { tableId:tableId, chairId:chair.Id }}">{{chair.Person.Name}}</router-link>
+            </li>
         </ul>
         <button @click="$emit('addFloorEvent')"  class="btn orange">Güncelle</button>
         
@@ -16,21 +21,33 @@
 
 <script>
 import {dataMixin} from "../dataMixin"
+import Alert from "./Alert"
 
 export default {
     mixins : [dataMixin],
     data(){
         return{
-            floorId : this.$route.params.floorId,
-            tableId : this.$route.params.tableId,
-            chairId : this.$route.params.chairId,
+            floorId : parseInt(this.$route.params.floorId),
+            tableId : parseInt(this.$route.params.tableId),
+            chairId : parseInt(this.$route.params.chairId),
            
             personsSittingPlanData:[],
-            SittingPlanDataChair :[]
+            SittingPlanData :[]
         }
     },
      methods : {
-        
+         filteredArray(filter)
+        {
+          var filteredArray = this.SittingPlanData.filter(function(obj,ind)
+          {
+              return obj.Id === filter.chairId;
+          });
+          return (filteredArray.length >0)?filteredArray:[];
+        }
+
+
+
+        /*
         filteredArray(filter)
         {
             
@@ -73,14 +90,25 @@ export default {
             }
             return -1;
         }
+        */
 
     },
-    created() 
+     components :{
+      Alert
+    },
+    created() {
+        this.getSittingPlanChairData()
+			    .then(response => {
+                    this.SittingPlanData = response.data;
+         
+			})
+    }
     //filteredArray() fonsksiyonunu başta tetiklemek için vreated() methodun içine yazdık
+    /*
         { 
             this.filteredArray({floorId:this.floorId,tableId:this.tableId,chairId:this.chairId})
         }
-   
+   */
     
 }
 </script>

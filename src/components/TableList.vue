@@ -1,10 +1,26 @@
 <template>
     <div class="container">
-        <h1 class="title">Kat {{floorId}} İçin Masa Listesi</h1>
+        <h1 class="title">{{filteredFloorName({floorId:floorId})}} Katı İçin Masa Listesi</h1>
         <hr style="border: 2px solid orange;">
+        <Alert v-if="filteredArray({floorId:floorId}) == false"/>
         <ul style="list-style-type:none;" class="list-group">
+         
+          <!--
             <li  v-for="(table,index) in filteredArray({floorId:floorId}).masalar" :key="index">
-                <router-link class="list-group-item" :to="{ name: 'chair', params: { floorId: floorId, tableId:table.id }}">{{table.name}}</router-link>
+                <router-link class="list-group-item" :to="{ name: 'chair', params: { floorId: floorId, tableId:table.Id }}">{{table.Name}}</router-link>
+            </li>
+            -->
+            
+            <!--
+            <li  v-for="(table,index) in filteredArray({floorId:floorId})" :key="index">
+              <router-link class="list-group-item" :to="{ name: 'chair', params: { floorId: floorId, tableId:table.Id }}">{{table.Name}}</router-link>
+            </li>
+            -->
+            
+            <li  v-for="(table,index) in filteredArray({floorId:floorId})" :key="index">
+              <router-link class="list-group-item" :to="{ name: 'chair', params: { floorId: floorId, tableId:table.Id }}">{{table.Name}}</router-link>
+           
+              
             </li>
         </ul>
         <button @click="$emit('addFloorEvent')"  class="btn orange">YENİ</button>
@@ -12,30 +28,51 @@
 </template>
 
 <script>
+import Alert from "./Alert"
 import {dataMixin} from "../dataMixin"
 
 export default {
     mixins : [dataMixin],
     data(){
         return {
+            floorSittingPlanData:[],
             tableSittingPlanData: [],
             floorId : parseInt(this.$route.params.floorId)
         }
     },
     methods : {
+        
         filteredArray(filter)
         {
           var filteredArray = this.tableSittingPlanData.filter(function(obj,ind)
           {
-              return obj.id === filter.floorId;
+            return obj.FloorId === filter.floorId;
           });
-          return (filteredArray.length >0)?filteredArray[0]:[];
+          return (filteredArray.length >0)?filteredArray:[];
+        },
+         filteredFloorName(filter)
+        {
+          var filteredFloorName = this.floorSittingPlanData.filter(function(obj,ind)
+          {
+            return obj.Id === filter.floorId;
+          });
+          return (filteredFloorName.length >0)?filteredFloorName[0].Name:[];
         }
     },
+    components :{
+      Alert
+    },
     created() {
-		this.getSittingPlanData()
+		this.getSittingPlanDeskData()
 			.then(response => {
-					this.tableSittingPlanData = response.data;
+          this.tableSittingPlanData = response.data;
+          //console.log(response.data)
+      })
+      this.getSittingPlanFloorData()
+			.then(response => {
+          this.floorSittingPlanData = response.data;
+          
+          
 			})
 		} 
      
