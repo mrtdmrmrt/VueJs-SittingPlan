@@ -1,6 +1,7 @@
 <template>
     <div class="container">
        <TableList 
+       :vuexGetTable="vuexGetTable"
        @addFloorEvent="showAddContainer"/>
        <AddTable 
         @hideAddContainerEvent ="showAdd = false"
@@ -18,6 +19,11 @@ export default {
       showAdd : false
     }
   
+  },
+  computed : {
+    vuexGetTable(){
+      return this.$store.getters.getAddedTable
+    }
   },
     components :{
       TableList,

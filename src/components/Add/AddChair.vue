@@ -3,9 +3,9 @@
         <div class="card shadow pt-2 pb-2" style="width: 30rem;">
             <div class="card-body">
                 <h5 class="card-title">FISHBONE İçin Sandalye Ekle</h5>
-                <input type="text" class="form-control mt-3 mb-3" placeholder="Sandalye ismi giriniz..">
+                <input type="text" v-model="addChair" ref="chairTextInput" :class="{'is-invalid' : isInvalid}"  class="form-control mt-3 mb-3" placeholder="Sandalye ismi giriniz..">
                 <a @click="$emit('hideAddContainerEvent',true)"  class="card-link btn btn-md danger">Vazgeç</a>
-                <a @click="$emit('hideAddContainerEvent',true)" class="card-link btn btn-md orange">Ekle</a>
+                <a @click="$emit('hideAddContainerEvent',add(),true)" class="card-link btn btn-md orange">Ekle</a>
             </div>
         </div>
     </div>
@@ -14,7 +14,39 @@
 
 <script>
 export default {
+    data(){
+        return {
+            addChair : "",
+            isInvalid : false
+        }
+    }, 
+     methods : {
+        add(){ 
+            console.log(this.addChair)
+            if(this.addChair !== ""){
+               
+                console.log("add")
+                axios.post("http://avengersacc01:3535/api/Chair/Post",{ 
+                    DeskId: parseInt(this.$route.params.tableId)
+                    
+                })
+                .then(function(response){
+                    console.log(response);
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+               
 
+                this.$store.dispatch("setChair",this.addChair)
+                this.addChair = ''
+                this.$nextTick(()=>this.$refs.chairTextInput.focus())
+                 this.isInvalid = false
+            }else{
+                this.isInvalid = true
+            }
+        }
+     }
 }
 </script>
 

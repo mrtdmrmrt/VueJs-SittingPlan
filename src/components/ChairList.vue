@@ -2,18 +2,29 @@
     <div class="container">
         <h1 class="title">{{SittingPlanDataTable.name}} Sandalye Listesi </h1> 
         <hr style="border: 2px solid orange;">
-        <Alert v-if="filteredArray({tableId:tableId}) == false"/>
+        <Alert v-if="filteredArray({tableId:tableId}) == false && vuexGetChair == '' " />
         <ul style="list-style-type:none;" class="list-group">
             <!--
             <li v-for="(chair,index) in chairSittingPlanData" :key="index">
                 <router-link class="list-group-item" :to="{ name: 'person', params: { floorId: floorId, tableId:tableId, chairId: chair.Id}}">{{chair.Id}}</router-link>
             </li>
             -->
+            
             <li  v-for="(chair,index) in filteredArray({tableId:tableId})" :key="index">
-                <router-link class="list-group-item" :to="{ name: 'person', params: { tableId:tableId, chairId:chair.Id }}">Sandalye {{chair.Id}}</router-link>
+                <router-link class="list-group-item" :to="{ name: 'person', params: { tableId:tableId, chairId:chair.Id }}">
+                    {{index+1}}.Sandalye {{filteredArray({tableId:tableId})[index].Person ? filteredArray({tableId:tableId})[index].Person.Name : 'Boş'}}
+                </router-link>
+                
+            </li>
+        </ul>
+        <ul style="list-style-type:none;" class="list-group">
+            
+            <li >
+            <router-link v-if="vuexGetChair !== '' " class="list-group-item" :to="{ name: 'person', params: { tableId:tableId, chairId:chairId}}">{{vuexGetChair}}</router-link>
             </li>
         </ul>
         <button @click="$emit('addFloorEvent')"  class="btn orange">YENİ</button>
+       
     </div>
 </template>
 
@@ -23,6 +34,16 @@ import Alert from "./Alert"
 
 export default {
     mixins : [dataMixin],
+     props : {
+     //Yeni --> Ekle butanına tıklanınca eklenen veriyi props yardımıyla aldık
+        vuexGetChair:{
+          required : false,
+          type : String
+         
+          
+        }
+        
+    },
     data(){
         return {
             SittingPlanData:[],
@@ -30,10 +51,12 @@ export default {
             chairSittingPlanData:[],
 
             floorId : parseInt(this.$route.params.floorId),
-            tableId : parseInt(this.$route.params.tableId)
+            tableId : parseInt(this.$route.params.tableId),
+            chairId : parseInt(this.$route.params.chairId)
         }
     },
      methods : {
+         
         filteredArray(filter)
         {
           var filteredArray = this.SittingPlanData.filter(function(obj,ind)
@@ -94,7 +117,8 @@ export default {
 			    .then(response => {
                     this.SittingPlanData = response.data;
          
-			})
+            })
+            
             /*
             this.filteredArray({floorId:this.floorId,tableId:this.tableId})
             

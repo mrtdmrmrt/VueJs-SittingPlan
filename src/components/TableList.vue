@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="title">{{filteredFloorName({floorId:floorId})}} Katı İçin Masa Listesi</h1>
         <hr style="border: 2px solid orange;">
-        <Alert v-if="filteredArray({floorId:floorId}) == false"/>
+        <Alert v-if="filteredArray({floorId:floorId}) == false && vuexGetTable == ''"/>
         <ul style="list-style-type:none;" class="list-group">
          
           <!--
@@ -17,12 +17,17 @@
             </li>
             -->
             
-            <li  v-for="(table,index) in filteredArray({floorId:floorId})" :key="index">
-              <router-link class="list-group-item" :to="{ name: 'chair', params: { floorId: floorId, tableId:table.Id }}">{{table.Name}}</router-link>
-           
-              
-            </li>
-        </ul>
+              <li  v-for="(table,index) in filteredArray({floorId:floorId})" :key="index">
+                <router-link class="list-group-item" :to="{ name: 'chair', params: { floorId: floorId, tableId:table.Id }}">{{table.Name}}</router-link>
+              </li>
+          </ul>
+          <!--Ekle Butonuna tıkladıktan sonra bu sayfada gösterilir-->
+            <ul style="list-style-type:none;" class="list-group">
+              <li >
+                <router-link v-if="vuexGetTable !== ''" class="list-group-item" :to="{ name: 'chair', params: { floorId: floorId,tableId:tableId }}">{{vuexGetTable}}</router-link>
+              </li>
+            </ul>
+        
         <button @click="$emit('addFloorEvent')"  class="btn orange">YENİ</button>
     </div>
 </template>
@@ -33,11 +38,22 @@ import {dataMixin} from "../dataMixin"
 
 export default {
     mixins : [dataMixin],
+    
+     props : {
+     //Yeni --> Ekle butanına tıklanınca eklenen veriyi props yardımıyla aldık
+        vuexGetTable:{
+          required : false,
+          type : String
+          
+        }
+        
+    },
     data(){
         return {
             floorSittingPlanData:[],
             tableSittingPlanData: [],
-            floorId : parseInt(this.$route.params.floorId)
+            floorId : parseInt(this.$route.params.floorId),
+            tableId : parseInt(this.$route.params.tableId)
         }
     },
     methods : {

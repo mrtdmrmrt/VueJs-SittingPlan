@@ -4,9 +4,9 @@
         <div id="div2" class="card shadow pt-2 pb-2"  style="width: 30rem;">
             <div class="card-body" >
                 <h5 class="card-title">Kat Ekle</h5>
-                <input v-model="katEkle" ref="katTextInput" :class="{'is-invalid' : isInvalid}" type="text" class="form-control mt-3 mb-3" placeholder="Kat ismi giriniz..">
+                <input v-model="addFloor" ref="katTextInput" :class="{'is-invalid' : isInvalid}" type="text" class="form-control mt-3 mb-3" placeholder="Kat ismi giriniz..">
                 <a @click="$emit('hideAddContainerEvent',true)"  class="card-link btn btn-md danger">Vazgeç</a>
-                <a @click="$emit('hideAddContainerEvent',ekle(),true)" class="card-link btn btn-md orange">Ekle</a>
+                <a @click="$emit('hideAddContainerEvent',add(),true)" class="card-link btn btn-md orange">Ekle</a>
             </div>
         </div>
     </div>
@@ -46,21 +46,21 @@ export default {
     data(){
         return{
             floorSittingPlanData: [],
-            katEkle : "",
+            addFloor : "",
             isInvalid : false
         }
     },
     methods : {
-        ekle(){
+        add(){
             /*
-            //vuex de ki action içinde ki setFloor a this.katEkle gönderildi
-            this.$store.dispatch("setFloor",this.katEkle)
+            //vuex de ki action içinde ki setFloor a this.addFloor gönderildi
+            this.$store.dispatch("setFloor",this.addFloor)
             */
-           if(this.katEkle !== ""){
-               console.log("kat ismi:", this.katEkle);
+           if(this.addFloor !== ""){
+               console.log("kat ismi:", this.addFloor);
 
-                axios.post("http://avengersacc01:3535/api/Floor/Post",{
-                    Name: this.katEkle
+                axios.post(this.baseURL+"/api/Floor/Post",{ //Apiye kayıt edildiği yer
+                    Name: this.addFloor
                 })
                 .then(function(response){
                     console.log(response);
@@ -70,8 +70,8 @@ export default {
                 });
                
 
-                this.$store.dispatch("setFloor",this.katEkle)//katEkle'yi gönderdik
-                this.katEkle = ''
+                this.$store.dispatch("setFloor",this.addFloor)//addFloor'yi gönderdik
+                this.addFloor = ''
                 this.$nextTick(()=>this.$refs.katTextInput.focus())//nuxtJs özelliği imlecin inputta kalmasını sağlar
                  this.isInvalid = false
             }else{

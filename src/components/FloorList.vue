@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="title"> Kat Listesi </h1>
         <hr style="border: 2px solid orange;">
-        <Alert v-if="floorSittingPlanData.length == 0"/>
+        <Alert v-if="floorSittingPlanData.length == 0 && vuexGetFloor == ''"/>
         <ul style="list-style-type:none;" class="list-group">
           <li v-for="(floor,index) in floorSittingPlanData" :key="index">
             
@@ -15,9 +15,10 @@
           </li>
         </ul>
         <ul style="list-style-type:none;" class="list-group">
-        
-          <router-link v-if="vuexGetFloor !== '' " vuexGetFloor class="list-group-item " :to="{ name: 'table', params: { floorId: floorSittingPlanData.Id }}">{{vuexGetFloor}}</router-link>
-         <!--Ekle Butonuna tıkladıktan sonra bu sayfada gösterilir-->
+          <li v-if="vuexGetFloor !== '' ">
+            <router-link  vuexGetFloor class="list-group-item" :to="{ name: 'table', params: { floorId: floorSittingPlanData.Id }}">{{vuexGetFloor}}</router-link>
+            <!--Ekle Butonuna tıkladıktan sonra bu sayfada gösterilir-->
+          </li>
         </ul>
         <button @click="$emit('addFloorEvent')" class="btn orange open-pop-up">YENİ</button>
         
@@ -64,6 +65,9 @@ export default {
 
 
 <style scoped>
+.yeni{
+  margin-top: 10px;
+}
 .list-group-item:hover{
     border:1px solid orange;
     box-shadow: 1px 1px 5px #ff9800;

@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-      <PersonList 
+    <div>
+      <PersonDetail
        @addFloorEvent="showAddContainer"/>
        <AddPerson 
         @hideAddContainerEvent ="showAdd = false"
@@ -10,11 +10,13 @@
 
 <script>
 import PersonList from "../components/PersonList"
+import PersonDetail from "../components/PersonDetail"
 import AddPerson from "../components/Add/AddPerson"
 
 export default {
     components : {
         PersonList,
+        PersonDetail,
         AddPerson
     },
     data(){

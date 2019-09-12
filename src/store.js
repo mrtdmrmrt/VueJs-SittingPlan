@@ -7,28 +7,59 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state : {  
-		addFloor : ""
+		addedFloor : "",
+		addedTable : "",
+		addedChair : "",
+		addedPeople : "",
 	},
 
 
 	mutations : {
-		addFloor(state,data){
-			state.addFloor=data;
+		AddedFloor(state,data){
+			state.addedFloor=data;
+		},
+		AddedTable(state,data){
+			state.addedTable=data;
+		},
+		AddedChair(state,data){
+			state.addedChair=data;
+		},
+		AddedPeople(state,data){
+			state.addedPeople=data;
 		}
 	},
 		
 	
 	actions : {
 		setFloor(vuexContext,data){
-			vuexContext.commit("addFloor",data)
+			vuexContext.commit("AddedFloor",data)
+		},
+		setTable(vuexContext,data){
+			vuexContext.commit("AddedTable",data)
+		},
+		setChair(vuexContext,data){
+			vuexContext.commit("AddedChair",data)
+		},
+		setPeople(vuexContext,data){
+			vuexContext.commit("AddedPeople",data)
 		}
 	},
 	
         
 	getters : {
 		getAddedFloor(state){
-            return state.addFloor
-        }
+            return state.addedFloor
+		},
+		getAddedTable(state){
+            return state.addedTable
+		},
+		getAddedChair(state){
+            return state.addedChair
+		},
+		getAddedPeople(state){
+            return state.addedPeople
+		},
+		
        
 	}
 

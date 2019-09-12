@@ -1,6 +1,7 @@
 <template>
     <div class="container">
       <ChairList 
+      :vuexGetChair="vuexGetChair"
       @addFloorEvent="showAddContainer"/>
 
       <AddChair 
@@ -18,7 +19,11 @@ export default {
         showAdd : false
       }
     },
-     
+    computed : {
+      vuexGetChair(){
+        return this.$store.getters.getAddedChair
+      }
+    }, 
     components :{
       ChairList,
       AddChair
