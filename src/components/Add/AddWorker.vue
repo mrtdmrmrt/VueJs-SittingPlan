@@ -5,11 +5,11 @@
             <div class="card shadow pt-2 pb-2" style="width: 30rem;">
                 <div class="card-body" >
                     <h5 class="card-title">Çalışan Ekle</h5>
-                    <input type="text" class="form-control mt-3 mb-3" placeholder="Lütfen isim giriniz..">
-                    <input type="text" class="form-control mt-3 mb-3" placeholder="Lütfen soyisim giriniz..">
-                    <input type="text" class="form-control mt-3 mb-3" placeholder="Lütfen E-Posta giriniz..">
+                    <input v-model="name" type="text" class="form-control mt-3 mb-3" placeholder="Lütfen isim giriniz..">
+                    <input v-model="surname" type="text" class="form-control mt-3 mb-3" placeholder="Lütfen soyisim giriniz..">
+                    <input v-model="eMail" type="text" class="form-control mt-3 mb-3" placeholder="Lütfen E-Posta giriniz..">
                
-                    <a @click="$emit('hideAddContainerEvent',add(),true)" class="card-link btn btn-md orange">Ekle</a>
+                    <a @click="add() , navigateToHome()" class="card-link btn btn-md orange">Ekle</a>
                 </div>
             </div>
         </div>
@@ -18,7 +18,46 @@
 </template>
 
 <script>
+import {dataMixin} from "../../dataMixin"
 export default {
+    mixins : [dataMixin],
+    data(){
+        return { 
+            
+            name : '',
+            surname : '',
+            eMail : ''
+        }
+    },
+    methods : {
+        add(){
+            
+            if(this.name !== "" && this.surname !== "" && this.eMail !== ""){
+                alert(this.name +" " + this.surname +" "+ this.eMail)
+                axios.post(this.baseURL+"/api/Person/Post",{
+                    Name: this.name,
+                    Surname: this.surname,
+                    Mail: this.eMail
+                })
+                .then(function(response){
+                    console.log(response);
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+                this.name = '';
+                this.surname = '';
+                this.eMail = '';
+                console.log("İşlem Başarılı..")   
+            }else{
+                alert("Lütfen tüm bilgileri giriniz..")
+            }
+        },
+        navigateToHome(){
+        	this.$router.push("/");  
+      	}
+    }
+    
     
 }
 </script>

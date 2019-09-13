@@ -13,7 +13,9 @@
 </template>
 
 <script>
+import {dataMixin} from "../../dataMixin"
 export default {
+    mixins : [dataMixin],
     data(){
         return {
             addChair : "",
@@ -26,7 +28,7 @@ export default {
             if(this.addChair !== ""){
                
                 console.log("add")
-                axios.post("http://avengersacc01:3535/api/Chair/Post",{ 
+                axios.post(this.baseURL+"/api/Chair/Post",{ 
                     DeskId: parseInt(this.$route.params.tableId)
                     
                 })

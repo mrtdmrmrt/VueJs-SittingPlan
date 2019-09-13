@@ -11,7 +11,11 @@
             -->
             
             <li  v-for="(chair,index) in filteredArray({tableId:tableId})" :key="index">
-                <router-link class="list-group-item" :to="{ name: 'person', params: { tableId:tableId, chairId:chair.Id }}">
+                <router-link v-if="filteredArray({tableId:tableId})[index].Person == null" class="list-group-item" :to="{ name: 'personlist', params: { tableId:tableId, chairId:chair.Id }}">
+                    {{index+1}}.Sandalye {{filteredArray({tableId:tableId})[index].Person ? filteredArray({tableId:tableId})[index].Person.Name : 'Boş'}}
+                </router-link>
+
+                <router-link v-if="filteredArray({tableId:tableId})[index].Person != null" class="list-group-item" :to="{ name: 'person', params: { tableId:tableId, chairId:chair.Id }}">
                     {{index+1}}.Sandalye {{filteredArray({tableId:tableId})[index].Person ? filteredArray({tableId:tableId})[index].Person.Name : 'Boş'}}
                 </router-link>
                 

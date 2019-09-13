@@ -33,7 +33,7 @@ export const router = new VueRouter({
 			name: 'person' 
 		},
 		{
-			path : "/floor/:floorId/table/:tableId/chair/:chairId/personlist", 
+			path : "/floor/:floorId/table/:tableId/chair/:chairId/", 
 			component : PersonList, 
 			name: 'personlist' 
 		},

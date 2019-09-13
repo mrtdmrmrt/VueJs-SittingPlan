@@ -2,34 +2,40 @@
     <div class="container">
         <h1 class="title">Sandalye {{chairId}} de Oturan Kişi </h1>
         <hr style="border: 2px solid orange;">
-        <h1>Burası person DETAİL</h1>
-        <Alert v-if="filteredArray({chairId:chairId}) == false"/>
-        <div class="row">
-             <div class="col-md-9">
-                <ul style="list-style-type:none;" class="list-group">
-           
-        <!--
+        
+      <!--  <Alert v-if="filteredArray({chairId:chairId}) == false"/> -->
+            <ul style="list-style-type:none;" class="list-group" v-for="(chair,index) in filteredArray({chairId:chairId})" :key="index">
+                <li class="list-group-item" >
+                    <strong>  Adı : </strong> {{chair.Person.Name}}
+                </li>
+                    
+                <li class="list-group-item" >
+                    <strong>Soyadı : </strong> {{chair.Person.Surname}}    
+                </li>
+                    
+                <li class="list-group-item" >                            
+                    <strong> E-Posta : </strong> {{chair.Person.Mail}}
+                </li>
+                    
+                <button @click="kaldir(chair.Person.Name , chair.Person.Surname, chair.Person.Mail)" class="btn danger">Kaldır</button>
+
+
+                    <!--
+                        
             <li class="list-group-item" v-for="(person,index) in personsSittingPlanData" :key="index">
                 <router-link  :to="{ name: 'person', params: { floorId: floorId, tableId:tableId, chairId:chairId, personId:person.id}}">{{person.name}}</router-link>
             </li>
-            -->
-                    <li  v-for="(chair,index) in filteredArray({chairId:chairId})" :key="index">
-                        <router-link class="list-group-item" :to="{ name: 'person', params: { tableId:tableId, chairId:chair.Id }}">
-                            {{chair.Person.Name}}
+                    -->
+                   <!--
+                    <li  class="yanyana" v-for="(person,index) in deneme" :key="index" >
+                        <router-link class="list-group-item" :to="{ name: 'person', params: { tableId:tableId }}">
+                            {{person.name}}
                         </router-link>
-                
+                    
+                        <button @click="kaldir(person.id , person.name)" class="btn danger">Kaldır</button>
                     </li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-sm btn-outline-danger flex-shrink-1">X</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                 <button class="btn danger">Kaldır</button>
-            </div>
-        </div>
+                    -->
+        </ul>
     </div>
 </template>
 
@@ -41,6 +47,10 @@ export default {
     mixins : [dataMixin],
     data(){
         return{
+            deneme : [
+                {id : 1 , name : 'mert'}
+               
+            ],
             floorId : parseInt(this.$route.params.floorId),
             tableId : parseInt(this.$route.params.tableId),
             chairId : parseInt(this.$route.params.chairId),
@@ -57,6 +67,23 @@ export default {
               return obj.Id === filter.chairId;
           });
           return (filteredArray.length >0)?filteredArray:[];
+        },
+
+        kaldir(name,surname,email){
+            console.log(this.chairId)
+            axios.post(this.baseURL+"/api/Chair/NotSeat",{ //Apiye kayıt edildiği yer
+                    chairid: this.chairId
+                })
+                .then(function(response){
+                    console.log(response);
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+               
+            
+               
+            alert(name +" "+ surname + " " + email)
         }
 
 
@@ -77,6 +104,15 @@ export default {
 </script>
 
 <style scoped>
+/*
+.yanyana{
+    display : flex; 
+    flex-direction: row;
+}
+.yanyana .btn {
+    margin-left : 40%;
+}
+*/
 .list-group-item:hover{
     border:1px solid orange;
     box-shadow: 1px 1px 5px #ff9800;
@@ -87,14 +123,14 @@ export default {
   text-decoration: none;
   color : #333;
 }
-.col-md-12 .danger{
+.danger{
     background-color: white;
     color : red;
     margin-left: 40%;
-    margin-top: 10px;
+    margin-top: 20px;
     border-color: red;
 }
-.col-md-12 .danger:hover{
+ .danger:hover{
     color:white;
     background-color: red;
     

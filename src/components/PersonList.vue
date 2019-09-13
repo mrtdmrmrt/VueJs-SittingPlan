@@ -3,20 +3,22 @@
         <h1 class="title">Personel Ekle</h1>
         <hr style="border: 2px solid orange;">
         <div class="dropdown">
-            <!--
                 <button type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown">
-                    Personel Listesi
+                   {{name ? name : 'Lütfen Personel Seçiniz'}}
                 </button>
-            -->
-            <input type="text" v-model="searchText" placeholder="Personel Listesi" data-toggle="dropdown"/>
+            
+           
+            
             
             <div class="dropdown-menu">
-                <a v-for="(data,index) in filtered" :key="index"  class="dropdown-item" href="#">{{data.name}}</a>
                 
-                
+                <input type="text" v-model="searchText" placeholder="Lütfen İsim giriniz.."  class="dropdown-item"/>
+                <a v-for="(data,index) in filtered" :key="index"  @click="yaz(data.Id,data.Name)" class="dropdown-item" href="#">{{data.Id}}. {{data.Name}} {{data.Surname}}</a> 
             </div>
+           
+            
         </div>
-        <button class="btn orange">Oturt</button>
+        <button @click="oturt()" class="btn orange">Oturt</button>
     </div>
 </template>
 
@@ -24,34 +26,69 @@
 import {dataMixin} from "../dataMixin"
 
 export default {
+     mixins : [dataMixin],
     data (){
         return{
+            SittingPlanPersonGetNotSeat : [],
+            id : '',
+            name :'',
             searchText : '',
-            deneme : [
-                {id : "1", name : "Mert"},
-                {id : "2", name : "Hasan"},
-                {id : "3", name : "Mehmet"},
-                {id : "4", name : "Ahmet"},
-                {id : "5", name : "Hasman"},
-                {id : "6", name : "Ahsen"},
-            ],
-            deneme2 : ["Mert","Hasan","Kadir","Mehmet","Memoli"]
+            floorId : parseInt(this.$route.params.floorId),
+            tableId : parseInt(this.$route.params.tableId),
+            chairId : parseInt(this.$route.params.chairId)
 
 
         }
     },
+    /*
     filters : {
         toLowercase(value){
             return value.toLowerCase();
+            console.log(value)
         }
     },
+    */
     computed : {
         filtered(){
-            return this.deneme.filter((element) =>{//element dolaştığı elemanı verir
-                return element.name.match(this.searchText);
+            return this.SittingPlanPersonGetNotSeat.filter((element) =>{
+                return element.Name.match(this.searchText);
             })
+        },
+        toLowercase(value){
+            return value.toLowerCase();
+        },
+    },
+    methods : {
+       
+        yaz(id,name){
+            this.id=id;
+            this.name = name;
+            
+        },
+        oturt(){
+            alert(this.id +" " + this.name);
+            this.searchText ='';
+            this.name = '';
+            axios.post(this.baseURL+"/api/Chair/Seat",{ 
+                    chairid : this.chairId,
+                    personid : this.id
+                })
+                .then(function(response){
+                    console.log(response);
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
         }
-    }
+    },
+    created() {
+			this.getSittingPlanPersonGetNotSeat()
+			    .then(response => {
+                    this.SittingPlanPersonGetNotSeat = response.data;
+          
+          
+			})
+		} 
 }
    
 </script>
@@ -71,7 +108,7 @@ export default {
 .orange{
     background-color: orange;
     color : white;
-    margin-top: 40%;
+    margin-top: 30%;
     margin-left : 70%;
 }
 .orange:hover{

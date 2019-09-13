@@ -27,6 +27,9 @@ export const dataMixin = {
         postSittingPlanFloorData (){
             axios.post(this.baseURL+"/api/Floor/Post");
         },
+        getSittingPlanPersonGetNotSeat(){
+            return axios.get(this.baseURL+"/api/Person/GetNotSeated");
+        }
     }
     
     /*data(){
