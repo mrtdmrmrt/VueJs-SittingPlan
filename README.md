@@ -1,4 +1,4 @@
-# slider
+# Sitting Plan
 
 > A Vue.js project
 
