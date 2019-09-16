@@ -2,40 +2,22 @@
     <div class="container">
         <h1 class="title">Sandalye {{chairId}} de Oturan Kişi </h1>
         <hr style="border: 2px solid orange;">
-        
       <!--  <Alert v-if="filteredArray({chairId:chairId}) == false"/> -->
-            <ul style="list-style-type:none;" class="list-group" v-for="(chair,index) in filteredArray({chairId:chairId})" :key="index">
-                <li class="list-group-item" >
-                    <strong>  Adı : </strong> {{chair.Person.Name}}
-                </li>
-                    
-                <li class="list-group-item" >
-                    <strong>Soyadı : </strong> {{chair.Person.Surname}}    
-                </li>
-                    
-                <li class="list-group-item" >                            
-                    <strong> E-Posta : </strong> {{chair.Person.Mail}}
-                </li>
-                    
-                <button @click="kaldir(chair.Person.Name , chair.Person.Surname, chair.Person.Mail)" class="btn danger">Kaldır</button>
-
-
-                    <!--
-                        
-            <li class="list-group-item" v-for="(person,index) in personsSittingPlanData" :key="index">
-                <router-link  :to="{ name: 'person', params: { floorId: floorId, tableId:tableId, chairId:chairId, personId:person.id}}">{{person.name}}</router-link>
+        <ul style="list-style-type:none;" class="list-group" v-for="(chair,index) in filteredArray({chairId:chairId})" :key="index">
+             <li class="list-group-item" >
+                <strong>  Adı : </strong> {{chair.Person.Name}}
             </li>
-                    -->
-                   <!--
-                    <li  class="yanyana" v-for="(person,index) in deneme" :key="index" >
-                        <router-link class="list-group-item" :to="{ name: 'person', params: { tableId:tableId }}">
-                            {{person.name}}
-                        </router-link>
                     
-                        <button @click="kaldir(person.id , person.name)" class="btn danger">Kaldır</button>
-                    </li>
-                    -->
+            <li class="list-group-item" >
+                <strong>Soyadı : </strong> {{chair.Person.Surname}}    
+            </li>
+                    
+            <li class="list-group-item" >                            
+                <strong> E-Posta : </strong> {{chair.Person.Mail}}
+            </li>  
+            <button @click="kaldir(chair.Person.Name , chair.Person.Surname, chair.Person.Mail)" class="btn danger">Kaldır</button>
         </ul>
+        <button @click="geri()" class="btn btn-outline-info"> Geri </button>
     </div>
 </template>
 
@@ -47,10 +29,7 @@ export default {
     mixins : [dataMixin],
     data(){
         return{
-            deneme : [
-                {id : 1 , name : 'mert'}
-               
-            ],
+           
             floorId : parseInt(this.$route.params.floorId),
             tableId : parseInt(this.$route.params.tableId),
             chairId : parseInt(this.$route.params.chairId),
@@ -60,6 +39,9 @@ export default {
         }
     },
      methods : {
+        geri(){
+          this.$router.push({name : "chair"})
+        },
          filteredArray(filter)
         {
           var filteredArray = this.SittingPlanData.filter(function(obj,ind)
@@ -80,10 +62,8 @@ export default {
                 .catch(function(error){
                     console.log(error);
                 });
-               
-            
-               
-            alert(name +" "+ surname + " " + email)
+            alert("İşlem Başarılı..")
+            this.$router.push({name : "chair"})
         }
 
 
@@ -95,24 +75,13 @@ export default {
         this.getSittingPlanChairData()
 			    .then(response => {
                     this.SittingPlanData = response.data;
-         
-			})
+		})
     }
-   
-    
 }
 </script>
 
 <style scoped>
-/*
-.yanyana{
-    display : flex; 
-    flex-direction: row;
-}
-.yanyana .btn {
-    margin-left : 40%;
-}
-*/
+
 .list-group-item:hover{
     border:1px solid orange;
     box-shadow: 1px 1px 5px #ff9800;
@@ -123,14 +92,24 @@ export default {
   text-decoration: none;
   color : #333;
 }
-.danger{
+.btn {
+  padding: 10px 40px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+.btn-outline-info{
+  margin-right: 70%;
+  margin-top: 20px;
+}
+ul .danger{
     background-color: white;
     color : red;
     margin-left: 40%;
     margin-top: 20px;
     border-color: red;
 }
- .danger:hover{
+ ul .danger:hover{
     color:white;
     background-color: red;
     

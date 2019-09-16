@@ -1,19 +1,15 @@
-
 <template>
-<div>
-  <Header />
-   <transition
-   enter-class=""
-   enter-active-class="animated bounceInLeft"
-   leave-class=""
-   leave-active-class="" 
-   appear>
-    <router-view></router-view>
-   </transition>
-<div>
-</div>   
-
-</div>
+  <div>
+    <Header />
+      <transition
+        enter-class=""
+        enter-active-class="animated bounceInLeft"
+        leave-class=""
+        leave-active-class="" 
+        appear>
+        <router-view></router-view>
+    </transition>
+  </div>
 </template>
 <script>
 
@@ -22,7 +18,6 @@ import Header from "./components/Header"
 export default {
   components : {
     Header
-
   }
 }
 </script>

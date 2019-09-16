@@ -6,19 +6,13 @@
                 <button type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown">
                    {{name ? name : 'Lütfen Personel Seçiniz'}}
                 </button>
-            
-           
-            
-            
             <div class="dropdown-menu">
-                
                 <input type="text" v-model="searchText" placeholder="Lütfen İsim giriniz.."  class="dropdown-item"/>
-                <a v-for="(data,index) in filtered" :key="index"  @click="yaz(data.Id,data.Name)" class="dropdown-item" href="#">{{data.Id}}. {{data.Name}} {{data.Surname}}</a> 
+                <a v-for="(data,index) in filtered" :key="index"  @click="yaz(data.Id,data.Name)" class="dropdown-item">{{data.Id}}. {{data.Name}} {{data.Surname}}</a> 
             </div>
-           
-            
         </div>
         <button @click="oturt()" class="btn orange">Oturt</button>
+        <button @click="geri()" class="btn btn-outline-info"> Geri </button>
     </div>
 </template>
 
@@ -59,14 +53,15 @@ export default {
         },
     },
     methods : {
-       
+       geri(){
+          this.$router.push({name : "chair"})
+        },
         yaz(id,name){
             this.id=id;
             this.name = name;
             
         },
         oturt(){
-            alert(this.id +" " + this.name);
             this.searchText ='';
             this.name = '';
             axios.post(this.baseURL+"/api/Chair/Seat",{ 
@@ -79,14 +74,14 @@ export default {
                 .catch(function(error){
                     console.log(error);
                 });
+                alert("İşlem Başarılı")
+                this.$router.push({name : "chair"})
         }
     },
     created() {
 			this.getSittingPlanPersonGetNotSeat()
 			    .then(response => {
                     this.SittingPlanPersonGetNotSeat = response.data;
-          
-          
 			})
 		} 
 }
@@ -95,6 +90,9 @@ export default {
 
 
 <style scoped>
+.dropdown-menu a{
+    cursor:pointer;
+}
 .title {
   font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -110,6 +108,10 @@ export default {
     color : white;
     margin-top: 30%;
     margin-left : 70%;
+    padding: 10px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 25px;
 }
 .orange:hover{
     color:orange;
@@ -117,5 +119,13 @@ export default {
     border-color: orange;
     cursor : pointer;
     
+}
+.btn-outline-info{
+  margin-right: 70%;
+  margin-top: 20px;
+padding: 10px 40px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 25px;
 }
 </style>

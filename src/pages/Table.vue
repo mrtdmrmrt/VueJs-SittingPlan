@@ -20,9 +20,9 @@ export default {
     }
   
   },
-  computed : {
-    vuexGetTable(){
-      return this.$store.getters.getAddedTable
+    computed : {
+      vuexGetTable(){
+        return this.$store.getters.getAddedTable
     }
   },
     components :{

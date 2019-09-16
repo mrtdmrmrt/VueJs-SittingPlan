@@ -1,13 +1,17 @@
 <template>
-
     <nav class="navbar navbar-light bg-light"> 
-        <a class="navbar-brand">Sitting Plan</a>
         
-            <li class="navbar-brand">
-                <router-link class="navbar-brand" 
-                to="/worker"
-                tag="li">Çalışan Ekle</router-link>
-            </li>
+        <li class="navbar-brand anaSayfa">
+            <router-link class="navbar-brand" 
+            to="/"
+            tag="li">Sitting Plan</router-link>
+        </li>
+        
+        <li class="navbar-brand">
+            <router-link class="navbar-brand" 
+            to="/worker"
+            tag="li">Çalışan Ekle</router-link>
+        </li>
         
     </nav>
   
@@ -23,7 +27,7 @@ export default {
 .navbar-brand li{
     cursor: pointer;
 }
-.navbar a{
+.navbar .anaSayfa{
 		text-align: center;
         margin-top: 5px;
         margin-left: 45%;

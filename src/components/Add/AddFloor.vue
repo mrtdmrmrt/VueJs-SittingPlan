@@ -1,16 +1,14 @@
 <template>
-<!--container-fluid -->
     <div id="div1" class="add-container container-fluid d-flex flex-column justify-content-center align-items-center" >
         <div id="div2" class="card shadow pt-2 pb-2"  style="width: 30rem;">
             <div class="card-body" >
                 <h5 class="card-title">Kat Ekle</h5>
-                <input v-model="addFloor" ref="katTextInput" :class="{'is-invalid' : isInvalid}" type="text" class="form-control mt-3 mb-3" placeholder="Kat ismi giriniz..">
+                <input v-model="addFloor" ref="katTextInput" type="text" class="form-control mt-3 mb-3" placeholder="Kat ismi giriniz..">
                 <a @click="$emit('hideAddContainerEvent',true)"  class="card-link btn btn-md danger">Vazgeç</a>
                 <a @click="$emit('hideAddContainerEvent',add(),true)" class="card-link btn btn-md orange">Ekle</a>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -40,22 +38,16 @@ document.onclick = function () {
     
 // }); 
 
-
 export default {
     mixins : [dataMixin],
     data(){
         return{
             floorSittingPlanData: [],
-            addFloor : "",
-            isInvalid : false
+            addFloor : "" 
         }
     },
     methods : {
         add(){
-            /*
-            //vuex de ki action içinde ki setFloor a this.addFloor gönderildi
-            this.$store.dispatch("setFloor",this.addFloor)
-            */
            if(this.addFloor !== ""){
                console.log("kat ismi:", this.addFloor);
 
@@ -68,26 +60,18 @@ export default {
                 .catch(function(error){
                     console.log(error);
                 });
-               
-
                 this.$store.dispatch("setFloor",this.addFloor)//addFloor'yi gönderdik
                 this.addFloor = ''
-                this.$nextTick(()=>this.$refs.katTextInput.focus())//nuxtJs özelliği imlecin inputta kalmasını sağlar
-                 this.isInvalid = false
-            }else{
-                this.isInvalid = true
-            }
+           }
+                
         }
-    },created() {
+    },
+    created() {
 			this.getSittingPlanFloorData()
 			.then(response => {
                 this.floorSittingPlanData = response.data;
-                // console.log(this.floorSittingPlanData[].Name)
-          
-          
 			})
 		} 
-
 }
 </script>
 

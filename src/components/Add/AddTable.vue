@@ -3,7 +3,7 @@
         <div class="card shadow pt-2 pb-2" style="width: 30rem;">
             <div class="card-body">
                 <h5 class="card-title">Kat İçin Masa Ekle</h5>
-                <input v-model="addTable" ref="masaTextInput" :class="{'is-invalid' : isInvalid}"  type="text" class="form-control mt-3 mb-3" placeholder="Masa ismi giriniz..">
+                <input v-model="addTable" type="text" class="form-control mt-3 mb-3" placeholder="Masa ismi giriniz..">
                 <a @click="$emit('hideAddContainerEvent',true)"  class="card-link btn btn-md danger">Vazgeç</a>
                 <a @click="$emit('hideAddContainerEvent',add(),true)" class="card-link btn btn-md orange">Ekle</a>
             </div>
@@ -17,15 +17,12 @@ import {dataMixin} from "../../dataMixin"
 export default {
     data(){
         return {
-            addTable : "",
-            isInvalid : false
+            addTable : ""
         }
     }, 
      methods : {
         add(){ 
             if(this.addTable !== ""){
-               
-
                 axios.post("http://avengersacc01:3535/api/Desk/Post",{ 
                     FloorId: this.$route.params.floorId,
                     Name: this.addTable
@@ -36,14 +33,8 @@ export default {
                 .catch(function(error){
                     console.log(error);
                 });
-               
-
                 this.$store.dispatch("setTable",this.addTable)
                 this.addTable = ''
-                this.$nextTick(()=>this.$refs.masaTextInput.focus())
-                 this.isInvalid = false
-            }else{
-                this.isInvalid = true
             }
         }
      }

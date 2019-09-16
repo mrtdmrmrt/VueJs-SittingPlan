@@ -7,9 +7,7 @@
     <AddFloor 
     @hideAddContainerEvent ="showAdd = false"
     :class="{'show-add-container' : showAdd} "/>
-    
   </div>
-
 </template>
 
 <script>
@@ -26,8 +24,7 @@ export default {
   computed: {
     vuexGetFloor(){
       return this.$store.getters.getAddedFloor
-    }
-      
+    }  
   },
   components : {
     FloorList,
