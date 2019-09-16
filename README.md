@@ -1,6 +1,9 @@
 # Sitting Plan
 
 > This project has been developed within Yemeksepet.com to facilitate floor design and seating plan. This page is only the Front-end part of the project.This project was developed using the Vue.js framework.> This project has been developed within Yemeksepet.com to facilitate floor design and seating plan. This page is only the Front-end part of the project.This project was developed using the Vue.js framework.
+---
+Inline-style: 
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 ## Build Setup
 
