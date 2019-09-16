@@ -5,7 +5,11 @@
 
 ## DESCRIPTION OF THE PROJECT
 
+<<<<<<< HEAD
 >This project has been prepared for the planning of which table and chair on which floor the working people will sit.
+=======
+> This project has been prepared for the planning of which table and chair on which floor the working people will sit.
+>>>>>>> 3833f17b8afebabf3369bc7294f53391fde2a016
 
 + At first we come across the main page is the floor list. 
 
