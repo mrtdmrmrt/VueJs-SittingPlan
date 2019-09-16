@@ -16,7 +16,7 @@
         <button @click="$emit('addFloorEvent')"  class="btn orange">YENİ</button>
         
         <button @click="geri()" class="btn btn-outline-info">Geri</button>
-         <router-link class="btn btn-outline-success"  :to="{ name: 'sittingplan', params: { floorId: floorId}}">Kat Planı</router-link>
+         
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 # Sitting Plan
 
-> This project has been developed within Yemeksepet.com to facilitate floor design and seating plan. This page is only the Front-end part of the project.This project was developed using the Vue.js framework.
+> This page is only the Front-end part of the project.This project was developed using the Vue.js framework.
 
 ## DESCRIPTION OF THE PROJECT
 

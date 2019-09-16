@@ -1,6 +1,11 @@
 <template>
     <nav class="navbar navbar-light bg-light"> 
-        
+         <li class="navbar-brand">
+            <router-link class="navbar-brand" 
+            to="/sittingplan"
+            tag="li">Tüm Kat Planı</router-link>
+        </li>
+
         <li class="navbar-brand anaSayfa">
             <router-link class="navbar-brand" 
             to="/"
@@ -30,7 +35,7 @@ export default {
 .navbar .anaSayfa{
 		text-align: center;
         margin-top: 5px;
-        margin-left: 45%;
+        
         }
 
 </style>

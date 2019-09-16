@@ -27,6 +27,9 @@ export const dataMixin = {
         },
         getSittingPlanPersonGetNotSeat(){
             return axios.get(this.baseURL+"/api/Person/GetNotSeated");
+        },
+        getSittinPlan(){
+            return axios.get(this.baseURL+"/api/Floor/GetAllPlan")
         }
         
     }

@@ -1,13 +1,29 @@
 <template>
     <div class="container">
-        <ul style="list-style-type:none;" class="list-group">
-            <li  v-for="(desk,index) in sittingPlan" :key="index">
-                {{desk.Name}}
+        <br>
+        
+        <ul class="list-group">
+            <li  v-for="(kat,index) in sittingPlan" :key="index" >
+                {{kat.Name}} Katı
+              
+                 <ul v-for="(masa,index) in kat.Desks" :key="index">
+                    <li >
+                        {{masa.Name}} Masası
+                      
+
+                        <ul v-for="(sandalye,index) in masa.Chairs" :key="index">
+                            <li >
+                                {{index+1}}.Sandalye {{sandalye.Person ? sandalye.Person.Name : 'Boş' }}
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+               
+               
                 
             </li>
-            <li  v-for="(chair,index) in sittingPlan" :key="index">
-                {{chair.Chairs}}
-            </li>
+            
         </ul>
     </div>
 </template>
@@ -17,15 +33,11 @@ export default {
     mixins : [dataMixin],
     data(){
         return {
-            sittingPlan : [],
-            floorId : parseInt(this.$route.params.floorId),
+            sittingPlan : []
+            
         }
     },
-    methods : {
-        getSittinPlan(){
-            return axios.get(this.baseURL+"/api/Floor/Get?floorid="+this.floorId)
-        }
-    },
+    
     created(){
         this.getSittinPlan()
 		.then(response => {

@@ -44,7 +44,7 @@ export const router = new VueRouter({
 			name: 'worker' 
 		},
 		{
-			path : "/floor/:floorId/sittingplan", 
+			path : "/sittingplan", 
 			component : SittingPlan, 
 			name: 'sittingplan' 
 		}
