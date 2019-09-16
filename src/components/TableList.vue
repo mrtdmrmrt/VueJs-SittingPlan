@@ -14,7 +14,9 @@
           </li>
         </ul>
         <button @click="$emit('addFloorEvent')"  class="btn orange">YENİ</button>
+        
         <button @click="geri()" class="btn btn-outline-info">Geri</button>
+         <router-link class="btn btn-outline-success"  :to="{ name: 'sittingplan', params: { floorId: floorId}}">Kat Planı</router-link>
     </div>
 </template>
 
@@ -100,6 +102,10 @@ export default {
 .btn-outline-info{
   margin-right: 70%;
   margin-top: 20px;
+}
+.btn-outline-success{
+  margin-left: 70%;
+ 
 }
 .orange {
   border-color: #ff9800;

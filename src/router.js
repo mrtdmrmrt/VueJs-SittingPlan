@@ -8,6 +8,7 @@ import Chair from "./pages/Chair"
 import Person from "./pages/Person"
 import Worker from "./pages/Worker"
 import PersonList from "./components/PersonList"
+import SittingPlan from "./components/SittingPlan"
 
 Vue.use(VueRouter)
 export const router = new VueRouter({
@@ -41,6 +42,11 @@ export const router = new VueRouter({
 			path : "/worker", 
 			component : Worker, 
 			name: 'worker' 
+		},
+		{
+			path : "/floor/:floorId/sittingplan", 
+			component : SittingPlan, 
+			name: 'sittingplan' 
 		}
 		
 	],
