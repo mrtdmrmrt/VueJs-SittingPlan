@@ -1,3 +1,4 @@
+![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/vue.png "Logo Vue.js")
 # Sitting Plan
 
 > This page is only the Front-end part of the project.This project was developed using the Vue.js framework.
