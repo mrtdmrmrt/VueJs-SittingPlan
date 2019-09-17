@@ -4,7 +4,7 @@
 > This page is only the Front-end part of the project.This project was developed using the Vue.js framework.
 
 ## THE PROJECT SCREENSHOT
-```bash
+
 ![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/screenshot/ana-sayfa.png "Landing page in the project")
 
 ![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/screenshot/calisan-ekle.png "Add worker page in the project")
@@ -19,7 +19,6 @@
 
 ![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/screenshot/kisi-ekle.png "Add person page in the project")
 
-```
 ## DESCRIPTION OF THE PROJECT
 
 >This project has been prepared for the planning of which table and chair on which floor the working people will sit.
