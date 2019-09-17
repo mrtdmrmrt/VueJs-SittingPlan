@@ -9,6 +9,16 @@
 
 ![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/screenshot/calisan-ekle.png "Add worker page in the project")
 
+![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/screenshot/tum-kat-listesi.png "All floor page in the project")
+
+![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/screenshot/masa.png "Desk page in the project")
+
+![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/screenshot/sandalye.png "Chair page in the project")
+
+![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/screenshot/kisi-detay.png "Person detail page in the project")
+
+![alt text](https://github.com/mrtdmrmrt/VueJs-SittingPlan/blob/master/src/image/screenshot/kisi-ekle.png "Add person page in the project")
+
 
 ## DESCRIPTION OF THE PROJECT
 
