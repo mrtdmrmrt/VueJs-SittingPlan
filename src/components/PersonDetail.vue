@@ -17,7 +17,7 @@
             </li>  
             <button @click="kaldir(chair.Person.Name , chair.Person.Surname, chair.Person.Mail)" class="btn danger">Kaldır</button>
         </ul>
-        <button @click="geri()" class="btn btn-outline-info"> Geri </button>
+        <button @click="geri('chair')" class="btn btn-outline-info"> Geri </button>
     </div>
 </template>
 
@@ -39,9 +39,7 @@ export default {
         }
     },
      methods : {
-        geri(){
-          this.$router.push({name : "chair"})
-        },
+       
          filteredArray(filter)
         {
           var filteredArray = this.SittingPlanData.filter(function(obj,ind)

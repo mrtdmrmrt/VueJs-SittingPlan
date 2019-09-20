@@ -14,11 +14,11 @@
                             type="email" 
                             class="form-control mt-3 mb-3" 
                             placeholder="Lütfen E-Posta giriniz..">
-                            <small v-if="!$v.email.required" class="form-text text-danger">*Bu alan zorunludur..</small>
                             <small v-if="!$v.email.email" class="form-text text-danger">*Lütfen geçerli bir email giriniz..</small>
                         </div>
                     </form>
-                    <a @click="add()" class="card-link btn btn-md orange">Ekle</a>
+                    
+                    <a @click="add()" :class="{'disabled ':showButton}" class="card-link btn btn-md orange">Ekle</a>
                 </div>
             </div>
         </div>
@@ -27,25 +27,27 @@
 
 <script>
 import {dataMixin} from "../../dataMixin"
-import {required, email} from "vuelidate/lib/validators"
+import {required,email} from "vuelidate/lib/validators"
 export default {
     mixins : [dataMixin],
     data(){
         return {   
             name : '',
             surname : '',
-            email : ''
+            email : '',
+            showButton : true
         }
     },
     validations : {
         email: {
-            required, //required: required ES6
+            required,
             email
         }
     },
+   
     methods : {
         add(){ 
-            if(this.name !== "" && this.surname !== "" && this.email !== ""){
+            if(this.name !== "" && this.surname !== "" && this.email !== "" && $v.email.email == true){
                 axios.post(this.baseURL+"/api/Person/Post",{
                     Name: this.name,
                     Surname: this.surname,
@@ -73,7 +75,17 @@ export default {
         navigateToWorker() {
             this.$router.push("/worker");
         }
-    }
+    },
+    updated (){
+        console.log()
+        if(this.name !== "" && this.surname !== "" && this.email !== "" && this.$v.email.email)
+        {
+            this.showButton = false
+        }
+        else{
+            this.showButton = true
+        }
+    } 
 }
 </script>
 
@@ -82,6 +94,7 @@ export default {
     margin-left:40%;
     background-color: orange;
     color : white;
+    
 }
 .card-body .orange:hover{
     color:orange;

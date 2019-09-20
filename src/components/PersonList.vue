@@ -12,7 +12,7 @@
             </div>
         </div>
         <button @click="oturt()" class="btn orange">Oturt</button>
-        <button @click="geri()" class="btn btn-outline-info"> Geri </button>
+        <button @click="geri('chair')" class="btn btn-outline-info"> Geri </button>
     </div>
 </template>
 
@@ -53,17 +53,15 @@ export default {
         },
     },
     methods : {
-       geri(){
-          this.$router.push({name : "chair"})
-        },
+       
         yaz(id,name){
             this.id=id;
             this.name = name;
             
         },
         oturt(){
-            this.searchText ='';
-            this.name = '';
+            if(this.searchText != '' && this.name !='')
+            {
             axios.post(this.baseURL+"/api/Chair/Seat",{ 
                     chairid : this.chairId,
                     personid : this.id
@@ -76,6 +74,12 @@ export default {
                 });
                 alert("İşlem Başarılı")
                 this.$router.push({name : "chair"})
+                this.searchText ='';
+                this.name = '';
+            }else{
+                alert("Personel Seçiniz..")
+            }
+            
         }
     },
     created() {

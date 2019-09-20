@@ -30,7 +30,10 @@ export const dataMixin = {
         },
         getSittinPlan(){
             return axios.get(this.baseURL+"/api/Floor/GetAllPlan")
-        }
+        },
+        geri(path){
+            this.$router.push({name : path})
+          },
         
     }
 }

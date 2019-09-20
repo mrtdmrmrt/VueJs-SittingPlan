@@ -15,7 +15,7 @@
         </ul>
         <button @click="$emit('addFloorEvent')"  class="btn orange">YENİ</button>
         
-        <button @click="geri()" class="btn btn-outline-info">Geri</button>
+        <button @click="geri('/')" class="btn btn-outline-info">Geri</button>
          
     </div>
 </template>
@@ -42,9 +42,7 @@ export default {
         }
     },
     methods : {
-        geri(){
-          this.$router.push("/")
-        },
+        
         filteredArray(filter)
         {
           var filteredArray = this.tableSittingPlanData.filter(function(obj,ind)

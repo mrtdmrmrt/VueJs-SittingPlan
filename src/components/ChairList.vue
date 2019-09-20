@@ -12,16 +12,18 @@
                 <router-link v-if="filteredArray({tableId:tableId})[index].Person != null" class="list-group-item" :to="{ name: 'person', params: { tableId:tableId, chairId:chair.Id }}">
                     {{index+1}}.Sandalye {{filteredArray({tableId:tableId})[index].Person ? filteredArray({tableId:tableId})[index].Person.Name : 'Boş'}}
                 </router-link>
-                
+
+               
             </li>
         </ul>
         <ul style="list-style-type:none;" class="list-group">
-            <li >
-                <router-link v-if="vuexGetChair !== '' " class="list-group-item" :to="{ name: 'person', params: { tableId:tableId, chairId:chairId}}">{{vuexGetChair}}</router-link>
+            <li>
+                 <router-link v-if="vuexGetChair !== '' " class="list-group-item" :to="{ name: 'personlist', params: { tableId:tableId, chairId:chairId}}">Sandalye Boş</router-link>
             </li>
         </ul>
+       
         <button @click="$emit('addFloorEvent')"  class="btn orange">YENİ</button>
-        <button @click="geri()" class="btn btn-outline-info"> Geri </button>
+        <button @click="geri('table')" class="btn btn-outline-info"> Geri </button>
     </div>
 </template>
 
@@ -34,7 +36,8 @@ export default {
      props : {
         vuexGetChair:{
           required : false,
-          type : String
+          type : String,
+          default : ''
         }
         
     },
@@ -50,9 +53,6 @@ export default {
         }
     },
      methods : {
-        geri(){
-          this.$router.push({name : "table"})
-        },
         filteredArray(filter)
         {
           var filteredArray = this.SittingPlanData.filter(function(obj,ind)
@@ -60,7 +60,7 @@ export default {
               
               return obj.DeskId === filter.tableId;
           });
-          return (filteredArray.length >0)?filteredArray:[];
+          return filteredArray.length > 0 ? filteredArray : [];
           
         }
         /*
